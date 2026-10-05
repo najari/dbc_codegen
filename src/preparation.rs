@@ -39,6 +39,7 @@ pub(crate) struct SignalMapping {
     pub wire_type: String,
     pub enum_variants: Vec<serde_json::Value>,
     pub reserved_names: Vec<String>,
+    pub mux: serde_json::Value,
 }
 
 #[derive(Serialize)]
@@ -52,6 +53,7 @@ pub(crate) struct MessageMapping {
     pub transmitters: Vec<String>,
     pub signals: Vec<SignalMapping>,
     pub generated_types: Vec<String>,
+    pub mux_api: &'static str,
 }
 
 pub(crate) fn ieee_type(dbc: &Dbc, msg: &Message, signal: &Signal) -> Option<&'static str> {
@@ -121,6 +123,13 @@ pub(crate) fn validate_source_ids(content: &str) -> Result<()> {
 // Bit arithmetic is bounded by the checked <=64-byte payload and <=64-bit widths.
 #[allow(clippy::arithmetic_side_effects, clippy::float_cmp)]
 fn validate(dbc: &Dbc) -> Result<()> {
+    for v in &dbc.extended_multiplex {
+        ensure!(
+            dbc.messages.iter().any(|m| m.id == v.message_id),
+            "mux references missing message {:?}",
+            v.message_id
+        );
+    }
     let mut ids = BTreeSet::new();
     for msg in dbc.messages.iter().filter(|m| !message_ignored(m)) {
         let context = format!("message `{}` ({:?})", msg.name, msg.id);
@@ -129,65 +138,99 @@ fn validate(dbc: &Dbc) -> Result<()> {
                 MessageId::Standard(id) => (false, u32::from(id)),
                 MessageId::Extended(id) => (true, id),
             };
-            ensure!(id <= if extended { 0x1fff_ffff } else { 0x7ff }, "invalid CAN ID range/extended marker");
-            ensure!(ids.insert((extended, id)), "duplicate CAN identity; ambiguous dispatch is unsupported");
-            ensure!(matches!(msg.size, 0..=8 | 12 | 16 | 20 | 24 | 32 | 48 | 64), "invalid CAN/CAN FD payload length {}", msg.size);
+            ensure!(
+                id <= if extended { 0x1fff_ffff } else { 0x7ff },
+                "invalid CAN ID range/extended marker"
+            );
+            ensure!(
+                ids.insert((extended, id)),
+                "duplicate CAN identity; ambiguous dispatch is unsupported"
+            );
+            ensure!(
+                matches!(msg.size, 0..=8 | 12 | 16 | 20 | 24 | 32 | 48 | 64),
+                "invalid CAN/CAN FD payload length {}",
+                msg.size
+            );
             for s in &msg.signals {
-                ensure!((1..=64).contains(&s.size), "signal `{}` wire width must be 1..=64, got {}", s.name, s.size);
+                ensure!(
+                    (1..=64).contains(&s.size),
+                    "signal `{}` wire width must be 1..=64, got {}",
+                    s.name,
+                    s.size
+                );
             }
-            let selectors: Vec<_> = msg.signals.iter().filter(|s| s.multiplexer_indicator == MultiplexIndicator::Multiplexor).collect();
-            ensure!(selectors.len() <= 1, "multiple multiplexors are unsupported");
-            ensure!(!dbc.extended_multiplex.iter().any(|v| v.message_id == msg.id), "SG_MUL_VAL_ extended/multiple-range multiplexing is unsupported");
+            let plan = crate::mux::Plan::build(dbc, msg)?;
             let mut names = BTreeSet::new();
             for s in &msg.signals {
                 (|| -> Result<()> {
                     ensure!(names.insert(&s.name), "duplicate source signal name");
-                    ensure!((1..=64).contains(&s.size), "wire width must be 1..=64, got {}", s.size);
-                    ensure!(s.factor.is_finite() && s.factor != 0.0 && s.offset.is_finite(), "factor must be finite/nonzero and offset finite");
+                    ensure!(
+                        (1..=64).contains(&s.size),
+                        "wire width must be 1..=64, got {}",
+                        s.size
+                    );
+                    ensure!(
+                        s.factor.is_finite() && s.factor != 0.0 && s.offset.is_finite(),
+                        "factor must be finite/nonzero and offset finite"
+                    );
                     let min = s.min.to_string().parse::<f64>()?;
                     let max = s.max.to_string().parse::<f64>()?;
-                    ensure!(min.is_finite() && max.is_finite() && min <= max, "invalid physical min/max");
+                    ensure!(
+                        min.is_finite() && max.is_finite() && min <= max,
+                        "invalid physical min/max"
+                    );
                     match s.byte_order {
-                        ByteOrder::LittleEndian => { le_start_end_bit(s, msg)?; }
-                        ByteOrder::BigEndian => { be_start_end_bit(s, msg)?; }
-                    }
-                    match s.multiplexer_indicator {
-                        MultiplexIndicator::MultiplexorAndMultiplexedSignal(_) => anyhow::bail!("nested multiplexing is unsupported"),
-                        MultiplexIndicator::MultiplexedSignal(index) => {
-                            ensure!(selectors.len() == 1, "missing multiplexor");
-                            ensure!(u128::from(index) < (1u128 << selectors[0].size), "mux value exceeds selector width");
+                        ByteOrder::LittleEndian => {
+                            le_start_end_bit(s, msg)?;
                         }
-                        MultiplexIndicator::Multiplexor => {
-                            ensure!(s.value_type == ValueType::Unsigned && s.factor == 1.0 && s.offset == 0.0 && ieee_type(dbc, msg, s).is_none(), "selector must be an unscaled unsigned integer");
+                        ByteOrder::BigEndian => {
+                            be_start_end_bit(s, msg)?;
                         }
-                        MultiplexIndicator::Plain => {}
                     }
                     if let Some(typ) = ieee_type(dbc, msg, s) {
-                        ensure!(s.size == if typ == "f32" { 32 } else { 64 }, "{typ} declaration has wrong wire width");
-                        ensure!(dbc.value_descriptions_for_signal(msg.id, &s.name).is_none(), "IEEE value-description enums are unsupported");
+                        ensure!(
+                            s.size == if typ == "f32" { 32 } else { 64 },
+                            "{typ} declaration has wrong wire width"
+                        );
+                        ensure!(
+                            dbc.value_descriptions_for_signal(msg.id, &s.name).is_none(),
+                            "IEEE value-description enums are unsupported"
+                        );
                     }
                     Ok(())
-                })().with_context(|| format!("signal `{}`", s.name))?;
+                })()
+                .with_context(|| format!("signal `{}`", s.name))?;
             }
             // Simultaneously active fields may not overlap. Different mux branches may.
             for (i, a) in msg.signals.iter().enumerate() {
-                for b in &msg.signals[i + 1..] {
-                    if matches!((&a.multiplexer_indicator, &b.multiplexer_indicator),
-                        (MultiplexIndicator::MultiplexedSignal(x), MultiplexIndicator::MultiplexedSignal(y)) if x != y) { continue; }
+                for (j, b) in msg.signals.iter().enumerate().skip(i + 1) {
+                    if plan.mutually_exclusive(i, j) {
+                        continue;
+                    }
                     let bits = |s: &Signal| -> BTreeSet<u64> {
                         match s.byte_order {
-                            ByteOrder::LittleEndian => (s.start_bit..s.start_bit + s.size).collect(),
+                            ByteOrder::LittleEndian => {
+                                (s.start_bit..s.start_bit + s.size).collect()
+                            }
                             ByteOrder::BigEndian => {
                                 let start = s.start_bit / 8 * 8 + 7 - s.start_bit % 8;
-                                (start..start + s.size).map(|p| p / 8 * 8 + 7 - p % 8).collect()
+                                (start..start + s.size)
+                                    .map(|p| p / 8 * 8 + 7 - p % 8)
+                                    .collect()
                             }
                         }
                     };
-                    ensure!(bits(a).is_disjoint(&bits(b)), "signals `{}` and `{}` overlap while active", a.name, b.name);
+                    ensure!(
+                        bits(a).is_disjoint(&bits(b)),
+                        "signals `{}` and `{}` overlap while active",
+                        a.name,
+                        b.name
+                    );
                 }
             }
             Ok(())
-        })().with_context(|| context)?;
+        })()
+        .with_context(|| context)?;
     }
     let mut types = BTreeSet::new();
     for v in &dbc.signal_extended_value_type_list {
@@ -303,6 +346,8 @@ fn signal_names(s: &Signal) -> Vec<String> {
         format!("set_{field}_raw_val"),
         format!("{field}_phys_val"),
         format!("{field}_multiplexed"),
+        format!("{field}_is_active"),
+        format!("select_{field}"),
         format!("set_{field}_quantized"),
         format!("{}_MIN", field.to_uppercase()),
         format!("{}_MAX", field.to_uppercase()),
@@ -315,7 +360,9 @@ fn family_names(dbc: &Dbc, msg: &Message) -> Result<Vec<String>> {
         if dbc.value_descriptions_for_signal(msg.id, &s.name).is_some() {
             names.push(enum_name(msg, s));
         }
-        if s.multiplexer_indicator == MultiplexIndicator::Multiplexor {
+        if s.multiplexer_indicator == MultiplexIndicator::Multiplexor
+            && !crate::mux::general(dbc, msg)
+        {
             names.push(multiplex_enum_name(msg, s)?);
             for branch in &msg.signals {
                 if let MultiplexIndicator::MultiplexedSignal(index) = branch.multiplexer_indicator {
@@ -400,6 +447,7 @@ pub(crate) fn prepare(source: &Dbc, config: &Config<'_>) -> Result<(Dbc, Vec<Mes
             selected.insert(format!("{:?}", original.id));
         }
         let msg = &mut dbc.messages[ordinal];
+        let mux_plan = crate::mux::Plan::build(source, original)?;
         let mut methods: BTreeSet<String> = [
             "new",
             "raw",
@@ -462,7 +510,8 @@ pub(crate) fn prepare(source: &Dbc, config: &Config<'_>) -> Result<(Dbc, Vec<Mes
             .signals
             .iter()
             .zip(&msg.signals)
-            .map(|(old, new)| SignalMapping {
+            .enumerate()
+            .map(|(i, (old, new))| SignalMapping {
                 source_name: old.name.clone(),
                 field_name: new.field_name(),
                 enum_name: source
@@ -478,6 +527,7 @@ pub(crate) fn prepare(source: &Dbc, config: &Config<'_>) -> Result<(Dbc, Vec<Mes
                     variants.iter().zip(crate::generate_variant_info(variants, old)).map(|(original, generated)| serde_json::json!({ "source_label": original.description, "raw_value": original.id, "canonical_raw_value": generated.value, "variant_name": generated.base_name })).collect()
                 }),
                 reserved_names: signal_names(new),
+                mux: serde_json::json!({"selector": mux_plan.selectors[i], "parent": mux_plan.parents[i].as_ref().map(|d| serde_json::json!({"source_name": original.signals[d.parent].name, "field_name": msg.signals[d.parent].field_name(), "ranges": d.ranges}))}),
             })
             .collect();
         let (extended, id) = match original.id {
@@ -494,6 +544,11 @@ pub(crate) fn prepare(source: &Dbc, config: &Config<'_>) -> Result<(Dbc, Vec<Mes
             transmitters,
             signals,
             generated_types: family_names(&lookup, msg)?,
+            mux_api: if crate::mux::general(source, original) {
+                "guarded"
+            } else {
+                "legacy"
+            },
         });
     }
     rename_references(&mut dbc, &remap);
@@ -521,6 +576,10 @@ fn rename_references(dbc: &mut Dbc, mapping: &BTreeMap<(String, String), String>
         {
             rename(*message_id, name);
         }
+    }
+    for v in &mut dbc.extended_multiplex {
+        rename(v.message_id, &mut v.signal_name);
+        rename(v.message_id, &mut v.multiplexor_signal_name);
     }
     for v in &mut dbc.comments {
         if let Comment::Signal {

@@ -1,28 +1,36 @@
 {
   "date": "2026-10-06",
-  "generator_revision": "8d0af24f258d356afc8c3a31d7a1f7de04e7209a",
-  "generator_source_sha256": "79fd5e9edf4a1bd15f631b8be808def0f9b41976d1f3f38fa0449714bd182ae0",
+  "generator_revision": "3cfa426af8fb154b443c406c648c619cf457b7a1",
+  "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
   "rust_1_98_1": {
-    "library_tests_passed": 48,
+    "library_tests_passed": 51,
     "cli_tests_passed": 1,
     "clippy_warnings_as_errors": "passed"
   },
   "rust_1_88_0": {
-    "library_tests_passed": 48,
+    "library_tests_passed": 51,
     "cli_check": "passed"
   },
   "samples": {
     "total": 88,
-    "compiled": 69,
-    "rejected": 19,
+    "compiled": 82,
+    "rejected": 6,
     "compile_failed": 0
+  },
+  "extended_mux": {
+    "samples_passed": 13,
+    "frames_passed": 222,
+    "masked_writes_passed": 1750
   },
   "comfort_compiled": 1,
   "dll_vectors_passed": 12,
   "dll_sha256": "f27e30791de1fd3ae6aea847c3f84bd3945bf51cdd7d5af71d6b2584f4681dbd",
   "source_samples_unchanged": true,
+  "previous_sample_names_preserved": 69,
   "excluded": [
-    "extended/nested mux support",
+    "negative mux key syntax",
+    "multiple parents for one signal",
+    "scaled or IEEE selectors",
     "CANLOG runtime and GUI integration",
     "upstream snapshot rebaseline"
   ]

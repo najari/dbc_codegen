@@ -2,6 +2,198 @@ use dbc_codegen::{Config, FeatureConfig, InputEncoding, RoundingPolicy, decode_i
 use std::{fs, path::PathBuf, process::Command};
 
 const DBC: &str = include_str!("fixtures/simulation.dbc");
+const EXTENDED: &str = include_str!("fixtures/extended_mux.dbc");
+
+#[test]
+fn extended_mux_runtime_and_no_std() {
+    let code = config(EXTENDED).generate().unwrap();
+    compile_and_run(
+        &code,
+        r#"
+        let mut r = Ranged::try_from(&[3, 0xff, 0x55, 0xa5][..]).unwrap();
+        assert!(r.a_is_active() && r.c_is_active() && !r.b_is_active());
+        assert_eq!(r.a().unwrap(), 255); assert_eq!(r.c().unwrap(), 0x55);
+        let old = *r.raw(); assert!(r.set_b(1).is_err()); assert!(r.b().is_err());
+        assert!(r.set_b_raw_val(0).is_err()); assert_eq!(*r.raw(), old);
+        assert_eq!(r.b_raw_val(), 255);
+        assert_eq!(r.set_a_quantized(0).unwrap(), 0); assert_eq!(*r.raw(), [3,0,0x55,0xa5]);
+        for key in [0,3,4,5] { r.select_switch(key).unwrap(); assert!(r.a_is_active()); }
+        r.select_switch(6).unwrap(); assert!(!r.a_is_active() && r.c_is_active());
+        r.select_switch(255).unwrap(); assert_eq!(r.switch(), -1); assert!(!r.a_is_active());
+        let old = *r.raw(); assert!(r.select_switch(256).is_err()); assert_eq!(*r.raw(),old);
+        r.select_switch(1).unwrap(); r.set_b(7).unwrap(); assert_eq!(r.b().unwrap(),7);
+        assert_eq!(r.always(),0xa5);
+
+        let mut n = Nested::try_from(&[1,0xff,0x44,0x55,0x66][..]).unwrap();
+        assert!(n.alternate_is_active()); assert!(!n.child_is_active());
+        let old = *n.raw(); assert!(n.select_child(0).is_err()); assert!(n.leaf1().is_err()); assert_eq!(*n.raw(),old);
+        n.select_switch(2).unwrap(); n.select_child(0).unwrap();
+        assert!(n.leaf0_is_active() && !n.leaf1_is_active()); assert_eq!(n.child().unwrap(),0);
+        n.set_leaf0(0).unwrap(); assert_eq!(*n.raw(),[2,0xfe,0,0x55,0x66]);
+        n.select_child(1).unwrap(); assert_eq!(n.child().unwrap(),-1);
+        assert!(n.leaf1_is_active() && !n.leaf0_is_active()); n.set_leaf1(42).unwrap();
+        assert_eq!(*n.raw(),[2,0xff,42,0x55,0x66]);
+        n.select_switch(1).unwrap(); assert!(!n.leaf1_is_active()); assert_eq!(n.alternate().unwrap(),255);
+
+        let mut d = Independent::try_from(&[0xfc,0xfd,11,22,0x5a][..]).unwrap();
+        assert!(d.a0_is_active() && d.b1_is_active()); d.set_a0(0).unwrap();
+        assert_eq!(*d.raw(),[0xfc,0xfd,0,22,0x5a]);
+        d.select_sa(1).unwrap(); d.select_sb(2).unwrap();
+        assert!(d.a1_is_active() && d.b2_is_active()); d.set_b2(0).unwrap();
+        assert_eq!(*d.raw(),[0xfd,0xfe,0,0,0x5a]);
+
+        let mut f = Floats::new().unwrap(); f.select_switch(1).unwrap();
+        f.set_value(-1.5).unwrap(); assert_eq!(f.value().unwrap(),-1.5);
+        assert_eq!(*f.raw(),[1,0,0,0xc0,0xbf,0]);
+        let old = *f.raw(); assert!(f.set_value(f32::NAN).is_err()); assert_eq!(*f.raw(),old);
+        f.select_switch(2).unwrap(); assert!(f.value().is_err());
+        f.set_state(FloatsState::On).unwrap(); assert!(matches!(f.state().unwrap(),FloatsState::On));
+        f.set_state_raw_val(255).unwrap(); assert!(matches!(f.state().unwrap(),FloatsState::Fault));
+
+        let mut w = WideSwitch::new().unwrap(); w.select_switch(u64::MAX).unwrap();
+        w.set_data(65).unwrap(); assert_eq!(w.data().unwrap(),65);
+        assert_eq!(&w.raw()[..8], &[255;8]); w.select_switch(0).unwrap(); assert!(w.data().is_err());
+    "#,
+    );
+}
+
+#[test]
+fn extended_mux_rejects_invalid_graphs_and_concurrent_overlap() {
+    let cases = [
+        (
+            EXTENDED.replace("300 A Switch 0-0, 3-5", "300 A Missing 0-0, 3-5"),
+            "missing signal",
+        ),
+        (
+            EXTENDED.replace("300 A Switch 0-0, 3-5", "300 A Always 0-0, 3-5"),
+            "not a selector",
+        ),
+        (
+            EXTENDED.replace("300 A Switch 0-0, 3-5", "300 A Switch 5-3"),
+            "reversed mux range",
+        ),
+        (
+            EXTENDED.replace("302 A0 SA 0-0", "302 A0 SA 4-4"),
+            "wire width",
+        ),
+        (
+            EXTENDED.replace("301 Child Switch 2-2", "301 Child Child 0-0"),
+            "self-referencing",
+        ),
+        (
+            format!("{EXTENDED}SG_MUL_VAL_ 301 Switch Child 0-0;\n"),
+            "cyclic mux",
+        ),
+        (
+            format!("{EXTENDED}SG_MUL_VAL_ 302 A0 SB 0-0;\n"),
+            "multiple parents",
+        ),
+        (
+            EXTENDED.replace(" SG_ B1 m1 : 24|8", " SG_ B1 m1 : 16|8"),
+            "overlap while active",
+        ),
+        (
+            EXTENDED.replace("300 B Switch 1-1", "300 B Switch 3-3"),
+            "overlap while active",
+        ),
+        (
+            EXTENDED.replace("SG_MUL_VAL_ 302 A0 SA 0-0;", ""),
+            "ambiguous multiplexor",
+        ),
+        (
+            EXTENDED.replace("SG_ Switch M : 0|8@1- (1,0)", "SG_ Switch M : 0|8@1- (2,0)"),
+            "unscaled integer",
+        ),
+        (
+            format!("{EXTENDED}SG_MUL_VAL_ 999 A Switch 0-0;\n"),
+            "missing message",
+        ),
+    ];
+    for (input, expected) in cases {
+        let error = config(&input).generate().unwrap_err();
+        assert!(
+            format!("{error:#}").contains(expected),
+            "{expected}: {error:#}"
+        );
+    }
+}
+
+#[test]
+fn extended_mux_manifest_naming_and_arbitrary() {
+    let renamed = EXTENDED.replace(" SG_ Always : 24", " SG_ AIsActive : 24");
+    let cfg = Config::builder()
+        .dbc_name("extended")
+        .dbc_content(&renamed)
+        .impl_arbitrary(FeatureConfig::Always)
+        .physical_f64(true)
+        .build();
+    let artifacts = cfg
+        .generate_artifacts(renamed.as_bytes(), InputEncoding::Utf8)
+        .unwrap();
+    let manifest: serde_json::Value = serde_json::from_str(&artifacts.manifest).unwrap();
+    let signals = manifest["messages"][0]["signals"].as_array().unwrap();
+    assert_eq!(
+        signals[1]["mux"]["parent"]["ranges"],
+        serde_json::json!([{"min":0,"max":0},{"min":3,"max":5}])
+    );
+    assert_ne!(signals[4]["field_name"], "a_is_active");
+    compile_and_run(
+        &artifacts.code,
+        r#"
+        use arbitrary::{Arbitrary,Unstructured};
+        let bytes = [0xa5;2048]; let mut u = Unstructured::new(&bytes);
+        let r = Ranged::arbitrary(&mut u).unwrap();
+        assert!(r.a_is_active() || r.b_is_active() || r.c_is_active());
+        let n = Nested::arbitrary(&mut u).unwrap();
+        assert!(n.alternate_is_active() || n.leaf0_is_active() || n.leaf1_is_active());
+        let d = Independent::arbitrary(&mut u).unwrap();
+        assert!(d.a0_is_active() || d.a1_is_active()); assert!(d.b1_is_active() || d.b2_is_active());
+        let mut f = Floats::new().unwrap(); f.select_switch(1).unwrap();
+        assert_eq!(f.set_value_quantized(1.5).unwrap(),1.5); assert_eq!(f.value().unwrap(),1.5);
+    "#,
+    );
+    let dumped = EXTENDED.replace("Child m2M", "Child M");
+    compile_and_run(
+        &config(&dumped).generate().unwrap(),
+        r#"
+        let n = Nested::try_from(&[2,1,42,0,0][..]).unwrap();
+        assert!(n.leaf1_is_active()); assert_eq!(n.leaf1().unwrap(),42);
+    "#,
+    );
+    let unsigned_child = EXTENDED.replace("Child m2M : 8|1@1-", "Child m2M : 8|1@1+");
+    compile_and_run(
+        &config(&unsigned_child).generate().unwrap(),
+        r#"
+        let n = Nested::try_from(&[2,1,42,0,0][..]).unwrap();
+        assert_eq!(n.child().unwrap(),1u8); assert_eq!(Nested::CHILD_MIN,0i128);
+    "#,
+    );
+    let parent_rename = EXTENDED.replace("Switch", "raw");
+    let nodes = ["RX"];
+    let scoped = Config::builder()
+        .dbc_name("renamed parent")
+        .dbc_content(&parent_rename)
+        .selected_nodes(&nodes)
+        .build()
+        .generate_artifacts(parent_rename.as_bytes(), InputEncoding::Utf8)
+        .unwrap();
+    let manifest: serde_json::Value = serde_json::from_str(&scoped.manifest).unwrap();
+    let parent = manifest["messages"][0]["signals"][0]["field_name"]
+        .as_str()
+        .unwrap();
+    assert_ne!(parent, "raw");
+    assert_eq!(
+        manifest["messages"][0]["signals"][1]["mux"]["parent"]["field_name"],
+        parent
+    );
+    assert_eq!(manifest["messages"].as_array().unwrap().len(), 5);
+    compile_and_run(
+        &scoped.code,
+        &format!(
+            "let mut r = Ranged::new().unwrap(); r.select_{parent}(3).unwrap(); r.set_a(42).unwrap(); assert_eq!(r.a().unwrap(),42);"
+        ),
+    );
+}
 
 fn config(content: &str) -> Config<'_> {
     Config::builder()

@@ -733,6 +733,13 @@ pub enum CanError {
         message_id: embedded_can::Id,
     },
     InvalidPayloadSize,
+    /// A conditional signal or nested selector is inactive in this payload.
+    InactiveSignal {
+        /// DBC message identifier.
+        message_id: embedded_can::Id,
+        /// Generated signal name.
+        signal: &'static str,
+    },
     /// Multiplexor value not defined in the dbc
     InvalidMultiplexor {
         /// dbc message id

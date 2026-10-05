@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Local CANLOG generator changes (2026-10-06)
 
+- Support SG_MUL_VAL_ value ranges, nested selectors, independent selectors and signed
+  selector wire patterns through guarded signal APIs. Keep legacy simple mux APIs.
+- Validate mux dependency graphs and simultaneous overlap; preserve source relations in
+  manifests. Add compiled corpus/DLL active-signal and masked-write comparisons.
+- Extended mux API: new() starts with padding bytes; conditional getters return Result,
+  *_is_active() reports activation and select_*() explicitly changes selector wire bits.
+  See docs/extended-multiplexing.ko.md for raw reads and unsupported ambiguous inputs.
+
 - Validate original IDs, CAN/FD sizes, signal ranges, overlap and unsupported mux definitions.
 - Allocate deterministic message/signal/enum/helper names; preserve their source mapping.
 - Honor IEEE float32/64, preserve raw bits and reject non-finite physical setters.

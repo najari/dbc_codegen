@@ -10,6 +10,7 @@
 mod artifact;
 mod feature_config;
 mod keywords;
+mod mux;
 mod numeric;
 mod pad;
 mod preparation;
@@ -349,6 +350,8 @@ impl Config<'_> {
     }
 
     fn render_message(&self, w: &mut impl Write, msg: &Message, dbc: &Dbc) -> Result<()> {
+        let general_mux = mux::general(dbc, msg);
+        let mux_plan = mux::Plan::build(dbc, msg)?;
         writeln!(w, "/// {}", msg.name)?;
         writeln!(w, "///")?;
         match msg.id {
@@ -401,7 +404,12 @@ impl Config<'_> {
 
             Self::render_cycle_time(&mut w, msg, dbc)?;
 
-            for signal in &msg.signals {
+            for (i, source_signal) in msg.signals.iter().enumerate() {
+                let mut signal = source_signal.clone();
+                if general_mux && mux_plan.selectors[i] {
+                    signal.multiplexer_indicator = Multiplexor;
+                }
+                let signal = &signal;
                 let typ = self.physical_type(dbc, msg, signal);
                 if typ != "bool" {
                     let sig = signal.field_name().to_uppercase();
@@ -430,7 +438,7 @@ impl Config<'_> {
                 .signals
                 .iter()
                 .filter_map(|signal| {
-                    if matches!(signal.multiplexer_indicator, Plain | Multiplexor) {
+                    if !general_mux && matches!(signal.multiplexer_indicator, Plain | Multiplexor) {
                         let field = signal.field_name();
                         let typ = self.public_type(dbc, msg, signal);
                         Some(format!("{field}: {typ}"))
@@ -443,7 +451,11 @@ impl Config<'_> {
             writeln!(w, "pub fn new({args}) -> Result<Self, CanError> {{")?;
             {
                 let mut w = PadAdapter::wrap(&mut w);
-                let mutable = if msg.signals.is_empty() { "" } else { "mut " };
+                let mutable = if general_mux || msg.signals.is_empty() {
+                    ""
+                } else {
+                    "mut "
+                };
                 let padding_value = if self.padding_bit_value {
                     "0xFF"
                 } else {
@@ -455,7 +467,7 @@ impl Config<'_> {
                     "let {mutable}res = Self {{ raw: [{padding_value}; {size}] }};"
                 )?;
                 for signal in &msg.signals {
-                    if matches!(signal.multiplexer_indicator, Plain | Multiplexor) {
+                    if !general_mux && matches!(signal.multiplexer_indicator, Plain | Multiplexor) {
                         writeln!(w, "res.set_{0}({0})?;", signal.field_name())?;
                     }
                 }
@@ -473,7 +485,11 @@ impl Config<'_> {
             writeln!(w, "}}")?;
             writeln!(w)?;
 
-            for signal in &msg.signals {
+            for (i, signal) in msg.signals.iter().enumerate() {
+                if general_mux {
+                    self.render_general_signal(&mut w, dbc, msg, &mux_plan, i)?;
+                    continue;
+                }
                 match signal.multiplexer_indicator {
                     Plain => self
                         .render_signal(&mut w, signal, dbc, msg)
@@ -518,12 +534,19 @@ impl Config<'_> {
 
         self.render_embedded_can_frame(w, msg)?;
 
-        self.impl_debug
-            .fmt_cfg(&mut *w, |w| render_debug_impl(w, msg))?;
-        self.impl_defmt
-            .fmt_cfg(&mut *w, |w| render_defmt_impl(w, msg))?;
-        self.impl_arbitrary
-            .fmt_cfg(&mut *w, |w| self.render_arbitrary(w, dbc, msg))?;
+        self.impl_debug.fmt_cfg(&mut *w, |w| {
+            render_debug_impl(w, msg, general_mux, &mux_plan)
+        })?;
+        self.impl_defmt.fmt_cfg(&mut *w, |w| {
+            render_defmt_impl(w, msg, general_mux, &mux_plan)
+        })?;
+        self.impl_arbitrary.fmt_cfg(&mut *w, |w| {
+            if general_mux {
+                Self::render_general_arbitrary(w, msg, &mux_plan)
+            } else {
+                self.render_arbitrary(w, dbc, msg)
+            }
+        })?;
 
         let enums_for_this_message = dbc.value_descriptions.iter().filter_map(|x| {
             if let ValueDescription::Signal {
@@ -550,7 +573,7 @@ impl Config<'_> {
             .iter()
             .find(|s| s.multiplexer_indicator == Multiplexor);
 
-        if let Some(multiplexor_signal) = multiplexor_signal {
+        if let Some(multiplexor_signal) = multiplexor_signal.filter(|_| !general_mux) {
             self.render_multiplexor_enums(w, dbc, msg, multiplexor_signal)?;
         }
 
@@ -1602,7 +1625,12 @@ impl embedded_can::Frame for {0} {{
     }
 }
 
-fn render_debug_impl(w: &mut impl Write, msg: &Message) -> Result<()> {
+fn render_debug_impl(
+    w: &mut impl Write,
+    msg: &Message,
+    general_mux: bool,
+    plan: &mux::Plan,
+) -> Result<()> {
     let typ = msg.type_name();
     writeln!(w, r"impl core::fmt::Debug for {typ} {{")?;
     {
@@ -1619,8 +1647,10 @@ fn render_debug_impl(w: &mut impl Write, msg: &Message) -> Result<()> {
                 writeln!(w, r#"f.debug_struct("{typ}")"#)?;
                 {
                     let mut w = PadAdapter::wrap(&mut w);
-                    for signal in &msg.signals {
-                        if signal.multiplexer_indicator == Plain {
+                    for (i, signal) in msg.signals.iter().enumerate() {
+                        if signal.multiplexer_indicator == Plain
+                            && (!general_mux || plan.parents[i].is_none())
+                        {
                             writeln!(w, r#".field("{0}", &self.{0}())"#, signal.field_name())?;
                         }
                     }
@@ -1641,7 +1671,12 @@ fn render_debug_impl(w: &mut impl Write, msg: &Message) -> Result<()> {
     Ok(())
 }
 
-fn render_defmt_impl(w: &mut impl Write, msg: &Message) -> Result<()> {
+fn render_defmt_impl(
+    w: &mut impl Write,
+    msg: &Message,
+    general_mux: bool,
+    plan: &mux::Plan,
+) -> Result<()> {
     let typ = msg.type_name();
     writeln!(w, r"impl defmt::Format for {typ} {{")?;
     {
@@ -1654,16 +1689,20 @@ fn render_defmt_impl(w: &mut impl Write, msg: &Message) -> Result<()> {
                 let mut w = PadAdapter::wrap(&mut w);
                 write!(w, r#""{typ} {{{{"#)?;
                 {
-                    for signal in &msg.signals {
-                        if signal.multiplexer_indicator == Plain {
+                    for (i, signal) in msg.signals.iter().enumerate() {
+                        if signal.multiplexer_indicator == Plain
+                            && (!general_mux || plan.parents[i].is_none())
+                        {
                             write!(w, r" {}={{:?}}", signal.name)?;
                         }
                     }
                 }
                 writeln!(w, r#" }}}}","#)?;
 
-                for signal in &msg.signals {
-                    if signal.multiplexer_indicator == Plain {
+                for (i, signal) in msg.signals.iter().enumerate() {
+                    if signal.multiplexer_indicator == Plain
+                        && (!general_mux || plan.parents[i].is_none())
+                    {
                         writeln!(w, "self.{}(),", signal.field_name())?;
                     }
                 }
@@ -1862,6 +1901,13 @@ pub enum CanError {
         message_id: embedded_can::Id,
     },
     InvalidPayloadSize,
+    /// A conditional signal or nested selector is inactive in this payload.
+    InactiveSignal {
+        /// DBC message identifier.
+        message_id: embedded_can::Id,
+        /// Generated signal name.
+        signal: &'static str,
+    },
     /// Multiplexor value not defined in the dbc
     InvalidMultiplexor {
         /// dbc message id

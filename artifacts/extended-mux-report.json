@@ -1,0 +1,5113 @@
+{
+  "dll_sha256": "f27e30791de1fd3ae6aea847c3f84bd3945bf51cdd7d5af71d6b2584f4681dbd",
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+  "samples_passed": 13,
+  "frames_passed": 222,
+  "masked_writes_passed": 1750,
+  "comparison": "active signal sets, exact wire bits, masked writes and inactive-write preservation",
+  "samples": [
+    {
+      "sample": "dbc_samples\\cantools\\dbc\\bus_comment.dbc",
+      "input_sha256": "680c43dcae5644be89562f3be2bdfe7d030db8a753775394ddbdb5bb621efe57",
+      "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
+      "frames_passed": 12,
+      "checks": [
+        {
+          "message": "Message1",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 41
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            29,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 7
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            33,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 8
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            37,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 9
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            61,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 15
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            65,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 16
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            69,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 17
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            93,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 23
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            97,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_A",
+            "BIT_B",
+            "BIT_C",
+            "BIT_D",
+            "BIT_E",
+            "BIT_F",
+            "BIT_G",
+            "BIT_H",
+            "BIT_J",
+            "BIT_K",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_F": 1,
+            "BIT_H": 0,
+            "BIT_B": 0,
+            "BIT_D": 1,
+            "BIT_E": 1,
+            "BIT_K": 0,
+            "BIT_A": 1,
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 24
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            101,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 25
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            253,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 63
+          },
+          "passed": true
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "sample": "dbc_samples\\cantools\\dbc\\multiplex.dbc",
+      "input_sha256": "2b34c7ade5bb1e0f3f4ae512d78b41a49adb23a2e9f870d3f48054865ae30293",
+      "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
+      "frames_passed": 12,
+      "checks": [
+        {
+          "message": "Message1",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 41
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            29,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 7
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            33,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 8
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            37,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 9
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            61,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 15
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            65,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 16
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            69,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 17
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            93,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 23
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            97,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_A",
+            "BIT_B",
+            "BIT_C",
+            "BIT_D",
+            "BIT_E",
+            "BIT_F",
+            "BIT_G",
+            "BIT_H",
+            "BIT_J",
+            "BIT_K",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_K": 0,
+            "BIT_D": 1,
+            "BIT_B": 0,
+            "BIT_F": 1,
+            "BIT_H": 0,
+            "BIT_E": 1,
+            "BIT_A": 1,
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 24
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            101,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 25
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            253,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 63
+          },
+          "passed": true
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "sample": "dbc_samples\\cantools\\dbc\\multiplex_dumped.dbc",
+      "input_sha256": "f21945f238fe940c481a629813034225c91a9bc7810ea8ed789b0a6d3a678c3e",
+      "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
+      "frames_passed": 12,
+      "checks": [
+        {
+          "message": "Message1",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 41
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            29,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 7
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            33,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 8
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            37,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 9
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            61,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 15
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            65,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 16
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            69,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 17
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            93,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 23
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            97,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_A",
+            "BIT_B",
+            "BIT_C",
+            "BIT_D",
+            "BIT_E",
+            "BIT_F",
+            "BIT_G",
+            "BIT_H",
+            "BIT_J",
+            "BIT_K",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_F": 1,
+            "BIT_H": 0,
+            "BIT_B": 0,
+            "BIT_D": 1,
+            "BIT_E": 1,
+            "BIT_K": 0,
+            "BIT_A": 1,
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 24
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            101,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 25
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            253,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 63
+          },
+          "passed": true
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "sample": "dbc_samples\\cantools\\dbc\\multiplex_choices.dbc",
+      "input_sha256": "a5957fed9cb049f7865f7a5105b469b0a9ee7f9b3c77dd0f7a003347a6f2b683",
+      "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
+      "frames_passed": 24,
+      "checks": [
+        {
+          "message": "Message1",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 41
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            29,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 7
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            33,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 8
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            37,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 9
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            61,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 15
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            65,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 16
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            69,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 17
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            93,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 23
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            97,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_A",
+            "BIT_B",
+            "BIT_C",
+            "BIT_D",
+            "BIT_E",
+            "BIT_F",
+            "BIT_G",
+            "BIT_H",
+            "BIT_J",
+            "BIT_K",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_K": 0,
+            "BIT_D": 1,
+            "BIT_B": 0,
+            "BIT_F": 1,
+            "BIT_H": 0,
+            "BIT_E": 1,
+            "BIT_A": 1,
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 24
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            101,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 25
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            253,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 63
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 41
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            29,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 7
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            33,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 8
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            37,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 9
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            61,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 15
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            65,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 16
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            69,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 17
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            93,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 23
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            97,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_A",
+            "BIT_B",
+            "BIT_C",
+            "BIT_D",
+            "BIT_E",
+            "BIT_F",
+            "BIT_G",
+            "BIT_H",
+            "BIT_J",
+            "BIT_K",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_K": 0,
+            "BIT_D": 1,
+            "BIT_B": 0,
+            "BIT_F": 1,
+            "BIT_H": 0,
+            "BIT_E": 1,
+            "BIT_A": 1,
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 24
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            101,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 25
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            253,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 63
+          },
+          "passed": true
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "sample": "dbc_samples\\cantools\\dbc\\multiplex_choices_dumped.dbc",
+      "input_sha256": "4d3786e4c39d217528ab86a454c5b8c8000f8afab5863b750780d32f3f59ebb0",
+      "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
+      "frames_passed": 30,
+      "checks": [
+        {
+          "message": "Message1",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 41
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            29,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 7
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            33,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 8
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            37,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 9
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            61,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 15
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            65,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 16
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            69,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 17
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            93,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 23
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            97,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_A",
+            "BIT_B",
+            "BIT_C",
+            "BIT_D",
+            "BIT_E",
+            "BIT_F",
+            "BIT_G",
+            "BIT_H",
+            "BIT_J",
+            "BIT_K",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_F": 1,
+            "BIT_H": 0,
+            "BIT_B": 0,
+            "BIT_D": 1,
+            "BIT_E": 1,
+            "BIT_K": 0,
+            "BIT_A": 1,
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 24
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            101,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 25
+          },
+          "passed": true
+        },
+        {
+          "message": "Message1",
+          "payload": [
+            253,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 63
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 41
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            29,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 7
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            33,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 8
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            37,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 9
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            61,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 15
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            65,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 16
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            69,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 17
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            93,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 23
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            97,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_A",
+            "BIT_B",
+            "BIT_C",
+            "BIT_D",
+            "BIT_E",
+            "BIT_F",
+            "BIT_G",
+            "BIT_H",
+            "BIT_J",
+            "BIT_K",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_F": 1,
+            "BIT_H": 0,
+            "BIT_B": 0,
+            "BIT_D": 1,
+            "BIT_E": 1,
+            "BIT_K": 0,
+            "BIT_A": 1,
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 24
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            101,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 25
+          },
+          "passed": true
+        },
+        {
+          "message": "Message2",
+          "payload": [
+            253,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 63
+          },
+          "passed": true
+        },
+        {
+          "message": "Message3",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 41
+          },
+          "passed": true
+        },
+        {
+          "message": "Message3",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Message3",
+          "payload": [
+            29,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 7
+          },
+          "passed": true
+        },
+        {
+          "message": "Message3",
+          "payload": [
+            33,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "BIT_C",
+            "BIT_G",
+            "BIT_J",
+            "BIT_L",
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "BIT_L": 1,
+            "BIT_G": 1,
+            "BIT_C": 0,
+            "BIT_J": 1,
+            "Multiplexor": 8
+          },
+          "passed": true
+        },
+        {
+          "message": "Message3",
+          "payload": [
+            37,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 9
+          },
+          "passed": true
+        },
+        {
+          "message": "Message3",
+          "payload": [
+            253,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "Multiplexor"
+          ],
+          "wire_values": {
+            "Multiplexor": 63
+          },
+          "passed": true
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "sample": "dbc_samples\\cantools\\dbc\\multiplex_2.dbc",
+      "input_sha256": "95f99e88fbb8693f7e78735c570a630a9ec2cd6f76efaef7ed556db698340090",
+      "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
+      "frames_passed": 38,
+      "checks": [
+        {
+          "message": "Shared",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S2"
+          ],
+          "wire_values": {
+            "S2": 165,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            160,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0"
+          ],
+          "wire_values": {
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            161,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1"
+          ],
+          "wire_values": {
+            "S1": 10,
+            "S0": 1
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            162,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S2"
+          ],
+          "wire_values": {
+            "S2": 165,
+            "S0": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            163,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S2"
+          ],
+          "wire_values": {
+            "S2": 165,
+            "S1": 10,
+            "S0": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            164,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S2"
+          ],
+          "wire_values": {
+            "S2": 165,
+            "S0": 4
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            166,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0"
+          ],
+          "wire_values": {
+            "S0": 6
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            175,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0"
+          ],
+          "wire_values": {
+            "S0": 15
+          },
+          "passed": true
+        },
+        {
+          "message": "Normal",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0"
+          ],
+          "wire_values": {
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Normal",
+          "payload": [
+            160,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1"
+          ],
+          "wire_values": {
+            "S1": 10,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Normal",
+          "payload": [
+            161,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S2"
+          ],
+          "wire_values": {
+            "S2": 165,
+            "S0": 1
+          },
+          "passed": true
+        },
+        {
+          "message": "Normal",
+          "payload": [
+            162,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0"
+          ],
+          "wire_values": {
+            "S0": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "Normal",
+          "payload": [
+            175,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0"
+          ],
+          "wire_values": {
+            "S0": 15
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            0,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 0,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            1,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6",
+            "S7"
+          ],
+          "wire_values": {
+            "S7": 10855845,
+            "S6": 1,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            2,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6",
+            "S8"
+          ],
+          "wire_values": {
+            "S8": 165,
+            "S6": 2,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            3,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 3,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            255,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 255,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            0,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S2",
+            "S3",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S3": 42405,
+            "S2": 165,
+            "S1": 0,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            16,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S1": 1,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            32,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S4",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S4": 10855845,
+            "S1": 2,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            48,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S1": 3,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            240,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S1": 15,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            160,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S1": 10,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            161,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S5",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S5": 173693530,
+            "S0": 1
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            162,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S0": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            175,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S0": 15
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S11",
+            "S9"
+          ],
+          "wire_values": {
+            "S9": 2779096485,
+            "S11": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            163,
+            160,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S10",
+            "S11"
+          ],
+          "wire_values": {
+            "S10": 2779096485,
+            "S0": 0,
+            "S11": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            163,
+            161,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S11"
+          ],
+          "wire_values": {
+            "S0": 1,
+            "S11": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            163,
+            175,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S11"
+          ],
+          "wire_values": {
+            "S0": 15,
+            "S11": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            160,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S11"
+          ],
+          "wire_values": {
+            "S11": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            162,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S11"
+          ],
+          "wire_values": {
+            "S11": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            163,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S11"
+          ],
+          "wire_values": {
+            "S0": 5,
+            "S11": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            164,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S11"
+          ],
+          "wire_values": {
+            "S11": 4
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            166,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S11"
+          ],
+          "wire_values": {
+            "S11": 6
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            191,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S11"
+          ],
+          "wire_values": {
+            "S11": 31
+          },
+          "passed": true
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "sample": "dbc_samples\\cantools\\dbc\\multiplex_2_dumped.dbc",
+      "input_sha256": "f3d92996d6d9cb24e389bf476a91b37a0dee6e8f73a39f006456edde78ed0e11",
+      "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
+      "frames_passed": 38,
+      "checks": [
+        {
+          "message": "Shared",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S2"
+          ],
+          "wire_values": {
+            "S2": 165,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            160,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0"
+          ],
+          "wire_values": {
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            161,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1"
+          ],
+          "wire_values": {
+            "S1": 10,
+            "S0": 1
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            162,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S2"
+          ],
+          "wire_values": {
+            "S2": 165,
+            "S0": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            163,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S2"
+          ],
+          "wire_values": {
+            "S2": 165,
+            "S1": 10,
+            "S0": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            164,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S2"
+          ],
+          "wire_values": {
+            "S2": 165,
+            "S0": 4
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            166,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0"
+          ],
+          "wire_values": {
+            "S0": 6
+          },
+          "passed": true
+        },
+        {
+          "message": "Shared",
+          "payload": [
+            175,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0"
+          ],
+          "wire_values": {
+            "S0": 15
+          },
+          "passed": true
+        },
+        {
+          "message": "Normal",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0"
+          ],
+          "wire_values": {
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Normal",
+          "payload": [
+            160,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1"
+          ],
+          "wire_values": {
+            "S1": 10,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Normal",
+          "payload": [
+            161,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S2"
+          ],
+          "wire_values": {
+            "S2": 165,
+            "S0": 1
+          },
+          "passed": true
+        },
+        {
+          "message": "Normal",
+          "payload": [
+            162,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0"
+          ],
+          "wire_values": {
+            "S0": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "Normal",
+          "payload": [
+            175,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0"
+          ],
+          "wire_values": {
+            "S0": 15
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            0,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 0,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            1,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6",
+            "S7"
+          ],
+          "wire_values": {
+            "S7": 10855845,
+            "S6": 1,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            2,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6",
+            "S8"
+          ],
+          "wire_values": {
+            "S8": 165,
+            "S6": 2,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            3,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 3,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            255,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 255,
+            "S0": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            0,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S2",
+            "S3",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S3": 42405,
+            "S2": 165,
+            "S1": 0,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            16,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S1": 1,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            32,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S4",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S4": 10855845,
+            "S1": 2,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            48,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S1": 3,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            240,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S1": 15,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            160,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S1",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S1": 10,
+            "S0": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            161,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S5",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S5": 173693530,
+            "S0": 1
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            162,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S0": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "Extended",
+          "payload": [
+            175,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S6"
+          ],
+          "wire_values": {
+            "S6": 165,
+            "S0": 15
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S11",
+            "S9"
+          ],
+          "wire_values": {
+            "S9": 2779096485,
+            "S11": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            163,
+            160,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S10",
+            "S11"
+          ],
+          "wire_values": {
+            "S10": 2779096485,
+            "S0": 0,
+            "S11": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            163,
+            161,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S11"
+          ],
+          "wire_values": {
+            "S0": 1,
+            "S11": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            163,
+            175,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S11"
+          ],
+          "wire_values": {
+            "S0": 15,
+            "S11": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            160,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S11"
+          ],
+          "wire_values": {
+            "S11": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            162,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S11"
+          ],
+          "wire_values": {
+            "S11": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            163,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S0",
+            "S11"
+          ],
+          "wire_values": {
+            "S0": 5,
+            "S11": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            164,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S11"
+          ],
+          "wire_values": {
+            "S11": 4
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            166,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S11"
+          ],
+          "wire_values": {
+            "S11": 6
+          },
+          "passed": true
+        },
+        {
+          "message": "ExtendedTypes",
+          "payload": [
+            191,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "S11"
+          ],
+          "wire_values": {
+            "S11": 31
+          },
+          "passed": true
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "sample": "dbc_samples\\cantools\\dbc\\issue_184_extended_mux_cascaded.dbc",
+      "input_sha256": "4d753054addc9d5f52fc06af82a99bc5461eea8f35388de364557f4c2e7ae253",
+      "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
+      "frames_passed": 10,
+      "checks": [
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A"
+          ],
+          "wire_values": {
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            2,
+            0,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "muxed_A_2_MUX_B",
+            "muxed_B_0"
+          ],
+          "wire_values": {
+            "muxed_B_0": 165,
+            "muxed_A_2_MUX_B": 0,
+            "MUX_A": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            2,
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "muxed_A_2_MUX_B",
+            "muxed_B_1"
+          ],
+          "wire_values": {
+            "muxed_B_1": 165,
+            "muxed_A_2_MUX_B": 1,
+            "MUX_A": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            2,
+            2,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "muxed_A_2_MUX_B"
+          ],
+          "wire_values": {
+            "muxed_A_2_MUX_B": 2,
+            "MUX_A": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            2,
+            255,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "muxed_A_2_MUX_B"
+          ],
+          "wire_values": {
+            "muxed_A_2_MUX_B": 255,
+            "MUX_A": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            0,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A"
+          ],
+          "wire_values": {
+            "MUX_A": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "muxed_A_1"
+          ],
+          "wire_values": {
+            "muxed_A_1": 165,
+            "MUX_A": 1
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            2,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "muxed_A_2_MUX_B"
+          ],
+          "wire_values": {
+            "muxed_A_2_MUX_B": 165,
+            "MUX_A": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            3,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A"
+          ],
+          "wire_values": {
+            "MUX_A": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            255,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A"
+          ],
+          "wire_values": {
+            "MUX_A": 255
+          },
+          "passed": true
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "sample": "dbc_samples\\cantools\\dbc\\issue_184_extended_mux_cascaded_dumped.dbc",
+      "input_sha256": "dc7b471628a5db9dfd1111ef7654bc803e0102a90f89a40178a580a4c3bcbb77",
+      "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
+      "frames_passed": 10,
+      "checks": [
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A"
+          ],
+          "wire_values": {
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            2,
+            0,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "muxed_A_2_MUX_B",
+            "muxed_B_0"
+          ],
+          "wire_values": {
+            "muxed_B_0": 165,
+            "muxed_A_2_MUX_B": 0,
+            "MUX_A": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            2,
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "muxed_A_2_MUX_B",
+            "muxed_B_1"
+          ],
+          "wire_values": {
+            "muxed_B_1": 165,
+            "muxed_A_2_MUX_B": 1,
+            "MUX_A": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            2,
+            2,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "muxed_A_2_MUX_B"
+          ],
+          "wire_values": {
+            "muxed_A_2_MUX_B": 2,
+            "MUX_A": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            2,
+            255,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "muxed_A_2_MUX_B"
+          ],
+          "wire_values": {
+            "muxed_A_2_MUX_B": 255,
+            "MUX_A": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            0,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A"
+          ],
+          "wire_values": {
+            "MUX_A": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "muxed_A_1"
+          ],
+          "wire_values": {
+            "muxed_A_1": 165,
+            "MUX_A": 1
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            2,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "muxed_A_2_MUX_B"
+          ],
+          "wire_values": {
+            "muxed_A_2_MUX_B": 165,
+            "MUX_A": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            3,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A"
+          ],
+          "wire_values": {
+            "MUX_A": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_cascaded",
+          "payload": [
+            255,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A"
+          ],
+          "wire_values": {
+            "MUX_A": 255
+          },
+          "passed": true
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "sample": "dbc_samples\\cantools\\dbc\\issue_184_extended_mux_independent_multiplexors.dbc",
+      "input_sha256": "ba80180b5f53e7d1413661862ec3487e09787a85ce21a1e0c5e920aa07f81489",
+      "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
+      "frames_passed": 10,
+      "checks": [
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B"
+          ],
+          "wire_values": {
+            "MUX_B": 165,
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            165,
+            165,
+            0,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B"
+          ],
+          "wire_values": {
+            "MUX_B": 0,
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            165,
+            165,
+            1,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B",
+            "muxed_B_1"
+          ],
+          "wire_values": {
+            "muxed_B_1": 165,
+            "MUX_B": 1,
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            165,
+            165,
+            2,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B",
+            "muxed_B_2"
+          ],
+          "wire_values": {
+            "muxed_B_2": 165,
+            "MUX_B": 2,
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            165,
+            165,
+            3,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B"
+          ],
+          "wire_values": {
+            "MUX_B": 3,
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            165,
+            165,
+            255,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B"
+          ],
+          "wire_values": {
+            "MUX_B": 255,
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            0,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B",
+            "muxed_A_0"
+          ],
+          "wire_values": {
+            "MUX_B": 165,
+            "muxed_A_0": 165,
+            "MUX_A": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B",
+            "muxed_A_1"
+          ],
+          "wire_values": {
+            "MUX_B": 165,
+            "muxed_A_1": 165,
+            "MUX_A": 1
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            2,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B"
+          ],
+          "wire_values": {
+            "MUX_B": 165,
+            "MUX_A": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            255,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B"
+          ],
+          "wire_values": {
+            "MUX_B": 165,
+            "MUX_A": 255
+          },
+          "passed": true
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "sample": "dbc_samples\\cantools\\dbc\\issue_184_extended_mux_independent_multiplexors_dumped.dbc",
+      "input_sha256": "6357609687274ae8a5381abbff590e7c7712d99e65d085df3ae3d70059c1b5d8",
+      "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
+      "frames_passed": 10,
+      "checks": [
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B"
+          ],
+          "wire_values": {
+            "MUX_B": 165,
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            165,
+            165,
+            0,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B"
+          ],
+          "wire_values": {
+            "MUX_B": 0,
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            165,
+            165,
+            1,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B",
+            "muxed_B_1"
+          ],
+          "wire_values": {
+            "muxed_B_1": 165,
+            "MUX_B": 1,
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            165,
+            165,
+            2,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B",
+            "muxed_B_2"
+          ],
+          "wire_values": {
+            "muxed_B_2": 165,
+            "MUX_B": 2,
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            165,
+            165,
+            3,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B"
+          ],
+          "wire_values": {
+            "MUX_B": 3,
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            165,
+            165,
+            255,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B"
+          ],
+          "wire_values": {
+            "MUX_B": 255,
+            "MUX_A": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            0,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B",
+            "muxed_A_0"
+          ],
+          "wire_values": {
+            "MUX_B": 165,
+            "muxed_A_0": 165,
+            "MUX_A": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B",
+            "muxed_A_1"
+          ],
+          "wire_values": {
+            "MUX_B": 165,
+            "muxed_A_1": 165,
+            "MUX_A": 1
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            2,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B"
+          ],
+          "wire_values": {
+            "MUX_B": 165,
+            "MUX_A": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_indep_multiplexors",
+          "payload": [
+            255,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX_A",
+            "MUX_B"
+          ],
+          "wire_values": {
+            "MUX_B": 165,
+            "MUX_A": 255
+          },
+          "passed": true
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "sample": "dbc_samples\\cantools\\dbc\\issue_184_extended_mux_multiple_values.dbc",
+      "input_sha256": "a7a3574958a724612bed2e67b516b4ba7c1d915fc0ba18e07ca1eb652b6d89b8",
+      "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
+      "frames_passed": 8,
+      "checks": [
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX"
+          ],
+          "wire_values": {
+            "MUX": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            0,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX",
+            "muxed_0_3_4_5"
+          ],
+          "wire_values": {
+            "muxed_0_3_4_5": 165,
+            "MUX": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX",
+            "muxed_1"
+          ],
+          "wire_values": {
+            "muxed_1": 165,
+            "MUX": 1
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            2,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX",
+            "muxed_2"
+          ],
+          "wire_values": {
+            "muxed_2": 165,
+            "MUX": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            3,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX",
+            "muxed_0_3_4_5"
+          ],
+          "wire_values": {
+            "muxed_0_3_4_5": 165,
+            "MUX": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            5,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX",
+            "muxed_0_3_4_5"
+          ],
+          "wire_values": {
+            "muxed_0_3_4_5": 165,
+            "MUX": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            6,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX"
+          ],
+          "wire_values": {
+            "MUX": 6
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            255,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX"
+          ],
+          "wire_values": {
+            "MUX": 255
+          },
+          "passed": true
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "sample": "dbc_samples\\cantools\\dbc\\issue_184_extended_mux_multiple_values_dumped.dbc",
+      "input_sha256": "d6018eb4aaab77c10dfd19a51a379f9828872f5a2d037ab79d3cb9f1b285a456",
+      "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
+      "frames_passed": 8,
+      "checks": [
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX"
+          ],
+          "wire_values": {
+            "MUX": 165
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            0,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX",
+            "muxed_0_3_4_5"
+          ],
+          "wire_values": {
+            "muxed_0_3_4_5": 165,
+            "MUX": 0
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            1,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX",
+            "muxed_1"
+          ],
+          "wire_values": {
+            "muxed_1": 165,
+            "MUX": 1
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            2,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX",
+            "muxed_2"
+          ],
+          "wire_values": {
+            "muxed_2": 165,
+            "MUX": 2
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            3,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX",
+            "muxed_0_3_4_5"
+          ],
+          "wire_values": {
+            "muxed_0_3_4_5": 165,
+            "MUX": 3
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            5,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX",
+            "muxed_0_3_4_5"
+          ],
+          "wire_values": {
+            "muxed_0_3_4_5": 165,
+            "MUX": 5
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            6,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX"
+          ],
+          "wire_values": {
+            "MUX": 6
+          },
+          "passed": true
+        },
+        {
+          "message": "ext_MUX_multiple_values",
+          "payload": [
+            255,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165,
+            165
+          ],
+          "active_signals": [
+            "MUX"
+          ],
+          "wire_values": {
+            "MUX": 255
+          },
+          "passed": true
+        }
+      ],
+      "source_unchanged": true
+    }
+  ]
+}

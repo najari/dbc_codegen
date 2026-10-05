@@ -1,8 +1,8 @@
 {
-  "code_sha256": "a491d26a64d2c2ebf98db46c683f9b284d2353ef17bac8f5cc17f81865868b8c",
+  "code_sha256": "e27265f9a19ae13b4774ce43947637f85fc1f20a3eac5e1a8a7f961691bfd3c8",
   "dbc_name": "example.dbc",
-  "generator_revision": "8d0af24f258d356afc8c3a31d7a1f7de04e7209a",
-  "generator_source_sha256": "79fd5e9edf4a1bd15f631b8be808def0f9b41976d1f3f38fa0449714bd182ae0",
+  "generator_revision": "3cfa426af8fb154b443c406c648c619cf457b7a1",
+  "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
   "generator_version": "0.4.0",
   "input_sha256": "2b8740aa930e340ca3c0e060b1349013efb05ede8c78e2b134375af1ca0c2be0",
   "messages": [
@@ -12,6 +12,7 @@
         "TemperatureData"
       ],
       "id": 256,
+      "mux_api": "legacy",
       "ordinal": 0,
       "signals": [
         {
@@ -20,6 +21,10 @@
           "enum_name": null,
           "enum_variants": [],
           "field_name": "average_temperature",
+          "mux": {
+            "parent": null,
+            "selector": false
+          },
           "receivers": [
             "FanController"
           ],
@@ -30,6 +35,8 @@
             "set_average_temperature_raw_val",
             "average_temperature_phys_val",
             "average_temperature_multiplexed",
+            "average_temperature_is_active",
+            "select_average_temperature",
             "set_average_temperature_quantized",
             "AVERAGE_TEMPERATURE_MIN",
             "AVERAGE_TEMPERATURE_MAX"
@@ -53,6 +60,7 @@
         "FanControlFanMode"
       ],
       "id": 257,
+      "mux_api": "legacy",
       "ordinal": 1,
       "signals": [
         {
@@ -80,6 +88,10 @@
             }
           ],
           "field_name": "fan_mode",
+          "mux": {
+            "parent": null,
+            "selector": false
+          },
           "receivers": [
             "FanController"
           ],
@@ -90,6 +102,8 @@
             "set_fan_mode_raw_val",
             "fan_mode_phys_val",
             "fan_mode_multiplexed",
+            "fan_mode_is_active",
+            "select_fan_mode",
             "set_fan_mode_quantized",
             "FAN_MODE_MIN",
             "FAN_MODE_MAX"
@@ -104,6 +118,10 @@
           "enum_name": null,
           "enum_variants": [],
           "field_name": "target_temperature",
+          "mux": {
+            "parent": null,
+            "selector": false
+          },
           "receivers": [
             "FanController"
           ],
@@ -114,6 +132,8 @@
             "set_target_temperature_raw_val",
             "target_temperature_phys_val",
             "target_temperature_multiplexed",
+            "target_temperature_is_active",
+            "select_target_temperature",
             "set_target_temperature_quantized",
             "TARGET_TEMPERATURE_MIN",
             "TARGET_TEMPERATURE_MAX"
@@ -137,6 +157,7 @@
         "FanStatusFanActive"
       ],
       "id": 258,
+      "mux_api": "legacy",
       "ordinal": 2,
       "signals": [
         {
@@ -145,6 +166,10 @@
           "enum_name": null,
           "enum_variants": [],
           "field_name": "fan_speed",
+          "mux": {
+            "parent": null,
+            "selector": false
+          },
           "receivers": [
             "ClimateController",
             "HMI"
@@ -156,6 +181,8 @@
             "set_fan_speed_raw_val",
             "fan_speed_phys_val",
             "fan_speed_multiplexed",
+            "fan_speed_is_active",
+            "select_fan_speed",
             "set_fan_speed_quantized",
             "FAN_SPEED_MIN",
             "FAN_SPEED_MAX"
@@ -183,6 +210,10 @@
             }
           ],
           "field_name": "fan_active",
+          "mux": {
+            "parent": null,
+            "selector": false
+          },
           "receivers": [
             "ClimateController",
             "HMI"
@@ -194,6 +225,8 @@
             "set_fan_active_raw_val",
             "fan_active_phys_val",
             "fan_active_multiplexed",
+            "fan_active_is_active",
+            "select_fan_active",
             "set_fan_active_quantized",
             "FAN_ACTIVE_MIN",
             "FAN_ACTIVE_MAX"
@@ -232,6 +265,8 @@
   },
   "policies": {
     "multiplexing": "single unsigned selector; extended/nested definitions rejected",
+    "mux_conditional_access": "guarded_physical_reads_and_writes_unchecked_raw_reads",
+    "mux_selection": "unsigned_wire_bits",
     "physical_special_values": "reject NaN and infinity; raw IEEE bits preserve all patterns",
     "publication": "two-file rollback on I/O failure; verify code_sha256 before reuse",
     "raw_setter": "wire-range-checked; bypasses physical min/max",

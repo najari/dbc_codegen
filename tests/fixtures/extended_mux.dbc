@@ -1,0 +1,54 @@
+VERSION ""
+NS_ :
+BS_:
+BU_: ECU RX
+
+BO_ 300 Ranged: 4 ECU
+ SG_ Switch M : 0|8@1- (1,0) [0|0] "" RX
+ SG_ A m0 : 8|8@1+ (1,0) [0|255] "" RX
+ SG_ B m1 : 8|8@1+ (1,0) [0|255] "" RX
+ SG_ C m3 : 16|8@1+ (1,0) [0|255] "" RX
+ SG_ Always : 24|8@1+ (1,0) [0|255] "" RX
+
+BO_ 301 Nested: 5 ECU
+ SG_ Switch M : 0|8@1+ (1,0) [0|0] "" RX
+ SG_ Child m2M : 8|1@1- (1,0) [0|0] "" RX
+ SG_ Alternate m1 : 8|8@1+ (1,0) [0|255] "" RX
+ SG_ Leaf0 m0 : 16|8@1+ (1,0) [0|255] "" RX
+ SG_ Leaf1 m1 : 16|8@1+ (1,0) [0|255] "" RX
+ SG_ Always : 32|8@1+ (1,0) [0|255] "" RX
+
+BO_ 302 Independent: 5 ECU
+ SG_ SA M : 0|2@1+ (1,0) [0|0] "" RX
+ SG_ SB M : 8|2@1+ (1,0) [0|0] "" RX
+ SG_ A0 m0 : 16|8@1+ (1,0) [0|255] "" RX
+ SG_ A1 m1 : 16|8@1+ (1,0) [0|255] "" RX
+ SG_ B1 m1 : 24|8@1+ (1,0) [0|255] "" RX
+ SG_ B2 m2 : 24|8@1+ (1,0) [0|255] "" RX
+ SG_ Common : 32|8@1+ (1,0) [0|255] "" RX
+
+BO_ 303 Floats: 6 ECU
+ SG_ Switch M : 0|8@1+ (1,0) [0|0] "" RX
+ SG_ Value m1 : 8|32@1- (1,0) [-10|10] "" RX
+ SG_ State m2 : 8|8@1+ (1,0) [0|255] "" RX
+
+BO_ 304 WideSwitch: 12 ECU
+ SG_ Switch M : 0|64@1+ (1,0) [0|0] "" RX
+ SG_ Data m1 : 64|8@1+ (1,0) [0|255] "" RX
+
+SG_MUL_VAL_ 300 A Switch 0-0, 3-5;
+SG_MUL_VAL_ 300 B Switch 1-1;
+SG_MUL_VAL_ 300 C Switch 3-6;
+SG_MUL_VAL_ 301 Child Switch 2-2;
+SG_MUL_VAL_ 301 Alternate Switch 1-1;
+SG_MUL_VAL_ 301 Leaf0 Child 0-0;
+SG_MUL_VAL_ 301 Leaf1 Child 1-1;
+SG_MUL_VAL_ 302 A0 SA 0-0;
+SG_MUL_VAL_ 302 A1 SA 1-1;
+SG_MUL_VAL_ 302 B1 SB 1-1;
+SG_MUL_VAL_ 302 B2 SB 2-2;
+SG_MUL_VAL_ 303 Value Switch 1-1;
+SG_MUL_VAL_ 303 State Switch 2-2;
+SG_MUL_VAL_ 304 Data Switch 18446744073709551614-18446744073709551615;
+SIG_VALTYPE_ 303 Value : 1;
+VAL_ 303 State 0 "Off" 1 "On" 255 "Fault";

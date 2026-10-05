@@ -11,10 +11,10 @@
       "generation": "passed",
       "input_sha256": "4295e71381968433b36d6616f77f27c95c1948ac307802529fd00a4ff4b66ef6",
       "manifest": {
-        "code_sha256": "9997340e7b572e4f27f366773f180551f91e9bad16d89b3a845d4d104fccfaea",
+        "code_sha256": "434ed80b4ca4aa55a521f27443cfcd307d233f176a1dfeac18a383194cfc07a7",
         "dbc_name": "Comfort.dbc",
-        "generator_revision": "8d0af24f258d356afc8c3a31d7a1f7de04e7209a",
-        "generator_source_sha256": "79fd5e9edf4a1bd15f631b8be808def0f9b41976d1f3f38fa0449714bd182ae0",
+        "generator_revision": "3cfa426af8fb154b443c406c648c619cf457b7a1",
+        "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
         "generator_version": "0.4.0",
         "input_sha256": "4295e71381968433b36d6616f77f27c95c1948ac307802529fd00a4ff4b66ef6",
         "messages": [
@@ -24,6 +24,7 @@
               "TpDashboard"
             ],
             "id": 1541,
+            "mux_api": "legacy",
             "ordinal": 0,
             "signals": [
               {
@@ -32,6 +33,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "data",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Console"
                 ],
@@ -42,6 +47,8 @@
                   "set_data_raw_val",
                   "data_phys_val",
                   "data_multiplexed",
+                  "data_is_active",
+                  "select_data",
                   "set_data_quantized",
                   "DATA_MIN",
                   "DATA_MAX"
@@ -64,6 +71,7 @@
               "DiagRequest"
             ],
             "id": 1792,
+            "mux_api": "legacy",
             "ordinal": 1,
             "signals": [],
             "size": 8,
@@ -77,6 +85,7 @@
               "DiagResponse"
             ],
             "id": 1536,
+            "mux_api": "legacy",
             "ordinal": 2,
             "signals": [],
             "size": 8,
@@ -90,6 +99,7 @@
               "DiagResponseMotor"
             ],
             "id": 1537,
+            "mux_api": "legacy",
             "ordinal": 3,
             "signals": [
               {
@@ -98,6 +108,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "data",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "data",
@@ -106,6 +120,8 @@
                   "set_data_raw_val",
                   "data_phys_val",
                   "data_multiplexed",
+                  "data_is_active",
+                  "select_data",
                   "set_data_quantized",
                   "DATA_MIN",
                   "DATA_MAX"
@@ -128,6 +144,7 @@
               "DiagResponseDoorLeft"
             ],
             "id": 1543,
+            "mux_api": "legacy",
             "ordinal": 4,
             "signals": [
               {
@@ -136,6 +153,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "data",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "data",
@@ -144,6 +165,8 @@
                   "set_data_raw_val",
                   "data_phys_val",
                   "data_multiplexed",
+                  "data_is_active",
+                  "select_data",
                   "set_data_quantized",
                   "DATA_MIN",
                   "DATA_MAX"
@@ -166,6 +189,7 @@
               "DiagRequestDbc6N1"
             ],
             "id": 1542,
+            "mux_api": "legacy",
             "ordinal": 5,
             "signals": [
               {
@@ -174,6 +198,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "data",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "DOOR_le"
                 ],
@@ -184,6 +212,8 @@
                   "set_data_raw_val",
                   "data_phys_val",
                   "data_multiplexed",
+                  "data_is_active",
+                  "select_data",
                   "set_data_quantized",
                   "DATA_MIN",
                   "DATA_MAX"
@@ -204,6 +234,7 @@
               "TpConsole"
             ],
             "id": 1540,
+            "mux_api": "legacy",
             "ordinal": 6,
             "signals": [
               {
@@ -212,6 +243,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "data",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Dashboard"
                 ],
@@ -222,6 +257,8 @@
                   "set_data_raw_val",
                   "data_phys_val",
                   "data_multiplexed",
+                  "data_is_active",
+                  "select_data",
                   "set_data_quantized",
                   "DATA_MIN",
                   "DATA_MAX"
@@ -244,6 +281,7 @@
               "NmGateway"
             ],
             "id": 1053,
+            "mux_api": "legacy",
             "ordinal": 7,
             "signals": [
               {
@@ -252,6 +290,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "sleep_ind",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Gateway",
                   "DOOR_ri",
@@ -264,6 +306,8 @@
                   "set_sleep_ind_raw_val",
                   "sleep_ind_phys_val",
                   "sleep_ind_multiplexed",
+                  "sleep_ind_is_active",
+                  "select_sleep_ind",
                   "set_sleep_ind_quantized",
                   "SLEEP_IND_MIN",
                   "SLEEP_IND_MAX"
@@ -286,6 +330,7 @@
               "NmDooRright"
             ],
             "id": 1052,
+            "mux_api": "legacy",
             "ordinal": 8,
             "signals": [
               {
@@ -294,6 +339,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "sleep_ind",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Gateway",
                   "DOOR_le"
@@ -305,6 +354,8 @@
                   "set_sleep_ind_raw_val",
                   "sleep_ind_phys_val",
                   "sleep_ind_multiplexed",
+                  "sleep_ind_is_active",
+                  "select_sleep_ind",
                   "set_sleep_ind_quantized",
                   "SLEEP_IND_MIN",
                   "SLEEP_IND_MAX"
@@ -327,6 +378,7 @@
               "NmDooRleft"
             ],
             "id": 1051,
+            "mux_api": "legacy",
             "ordinal": 9,
             "signals": [
               {
@@ -335,6 +387,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "sleep_ind",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Gateway",
                   "DOOR_ri"
@@ -346,6 +402,8 @@
                   "set_sleep_ind_raw_val",
                   "sleep_ind_phys_val",
                   "sleep_ind_multiplexed",
+                  "sleep_ind_is_active",
+                  "select_sleep_ind",
                   "set_sleep_ind_quantized",
                   "SLEEP_IND_MIN",
                   "SLEEP_IND_MAX"
@@ -368,6 +426,7 @@
               "NmConsole"
             ],
             "id": 1050,
+            "mux_api": "legacy",
             "ordinal": 10,
             "signals": [
               {
@@ -376,6 +435,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "sleep_ind",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Console",
                   "Gateway",
@@ -389,6 +452,8 @@
                   "set_sleep_ind_raw_val",
                   "sleep_ind_phys_val",
                   "sleep_ind_multiplexed",
+                  "sleep_ind_is_active",
+                  "select_sleep_ind",
                   "set_sleep_ind_quantized",
                   "SLEEP_IND_MIN",
                   "SLEEP_IND_MAX"
@@ -411,6 +476,7 @@
               "DoorR"
             ],
             "id": 497,
+            "mux_api": "legacy",
             "ordinal": 11,
             "signals": [
               {
@@ -419,6 +485,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "wn_position",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "wn_position",
@@ -427,6 +497,8 @@
                   "set_wn_position_raw_val",
                   "wn_position_phys_val",
                   "wn_position_multiplexed",
+                  "wn_position_is_active",
+                  "select_wn_position",
                   "set_wn_position_quantized",
                   "WN_POSITION_MIN",
                   "WN_POSITION_MAX"
@@ -449,6 +521,7 @@
               "DoorL"
             ],
             "id": 496,
+            "mux_api": "legacy",
             "ordinal": 12,
             "signals": [
               {
@@ -457,6 +530,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "wn_position",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "wn_position",
@@ -465,6 +542,8 @@
                   "set_wn_position_raw_val",
                   "wn_position_phys_val",
                   "wn_position_multiplexed",
+                  "wn_position_is_active",
+                  "select_wn_position",
                   "set_wn_position_quantized",
                   "WN_POSITION_MIN",
                   "WN_POSITION_MAX"
@@ -488,6 +567,7 @@
               "Console2Active"
             ],
             "id": 417,
+            "mux_api": "legacy",
             "ordinal": 13,
             "signals": [
               {
@@ -496,6 +576,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "phase",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "phase",
@@ -504,6 +588,8 @@
                   "set_phase_raw_val",
                   "phase_phys_val",
                   "phase_multiplexed",
+                  "phase_is_active",
+                  "select_phase",
                   "set_phase_quantized",
                   "PHASE_MIN",
                   "PHASE_MAX"
@@ -543,6 +629,10 @@
                   }
                 ],
                 "field_name": "active",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "active",
@@ -551,6 +641,8 @@
                   "set_active_raw_val",
                   "active_phys_val",
                   "active_multiplexed",
+                  "active_is_active",
+                  "select_active",
                   "set_active_quantized",
                   "ACTIVE_MIN",
                   "ACTIVE_MAX"
@@ -565,6 +657,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "light",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "light",
@@ -573,6 +669,8 @@
                   "set_light_raw_val",
                   "light_phys_val",
                   "light_multiplexed",
+                  "light_is_active",
+                  "select_light",
                   "set_light_quantized",
                   "LIGHT_MIN",
                   "LIGHT_MAX"
@@ -595,6 +693,7 @@
               "Console1"
             ],
             "id": 416,
+            "mux_api": "legacy",
             "ordinal": 14,
             "signals": [
               {
@@ -603,6 +702,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "wn_right_up",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "DOOR_ri"
                 ],
@@ -613,6 +716,8 @@
                   "set_wn_right_up_raw_val",
                   "wn_right_up_phys_val",
                   "wn_right_up_multiplexed",
+                  "wn_right_up_is_active",
+                  "select_wn_right_up",
                   "set_wn_right_up_quantized",
                   "WN_RIGHT_UP_MIN",
                   "WN_RIGHT_UP_MAX"
@@ -627,6 +732,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "wn_right_down",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "DOOR_ri"
                 ],
@@ -637,6 +746,8 @@
                   "set_wn_right_down_raw_val",
                   "wn_right_down_phys_val",
                   "wn_right_down_multiplexed",
+                  "wn_right_down_is_active",
+                  "select_wn_right_down",
                   "set_wn_right_down_quantized",
                   "WN_RIGHT_DOWN_MIN",
                   "WN_RIGHT_DOWN_MAX"
@@ -651,6 +762,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "wn_left_up",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "DOOR_le"
                 ],
@@ -661,6 +776,8 @@
                   "set_wn_left_up_raw_val",
                   "wn_left_up_phys_val",
                   "wn_left_up_multiplexed",
+                  "wn_left_up_is_active",
+                  "select_wn_left_up",
                   "set_wn_left_up_quantized",
                   "WN_LEFT_UP_MIN",
                   "WN_LEFT_UP_MAX"
@@ -675,6 +792,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "wn_left_down",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "DOOR_le"
                 ],
@@ -685,6 +806,8 @@
                   "set_wn_left_down_raw_val",
                   "wn_left_down_phys_val",
                   "wn_left_down_multiplexed",
+                  "wn_left_down_is_active",
+                  "select_wn_left_down",
                   "set_wn_left_down_quantized",
                   "WN_LEFT_DOWN_MIN",
                   "WN_LEFT_DOWN_MAX"
@@ -699,6 +822,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "mirror_r2d",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "mirror_r2d",
@@ -707,6 +834,8 @@
                   "set_mirror_r2d_raw_val",
                   "mirror_r2d_phys_val",
                   "mirror_r2d_multiplexed",
+                  "mirror_r2d_is_active",
+                  "select_mirror_r2d",
                   "set_mirror_r2d_quantized",
                   "MIRROR_R2D_MIN",
                   "MIRROR_R2D_MAX"
@@ -721,6 +850,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "mirror_r2u",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "mirror_r2u",
@@ -729,6 +862,8 @@
                   "set_mirror_r2u_raw_val",
                   "mirror_r2u_phys_val",
                   "mirror_r2u_multiplexed",
+                  "mirror_r2u_is_active",
+                  "select_mirror_r2u",
                   "set_mirror_r2u_quantized",
                   "MIRROR_R2U_MIN",
                   "MIRROR_R2U_MAX"
@@ -743,6 +878,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "mirror_r2r",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "mirror_r2r",
@@ -751,6 +890,8 @@
                   "set_mirror_r2r_raw_val",
                   "mirror_r2r_phys_val",
                   "mirror_r2r_multiplexed",
+                  "mirror_r2r_is_active",
+                  "select_mirror_r2r",
                   "set_mirror_r2r_quantized",
                   "MIRROR_R2R_MIN",
                   "MIRROR_R2R_MAX"
@@ -765,6 +906,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "mirror_r2l",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "mirror_r2l",
@@ -773,6 +918,8 @@
                   "set_mirror_r2l_raw_val",
                   "mirror_r2l_phys_val",
                   "mirror_r2l_multiplexed",
+                  "mirror_r2l_is_active",
+                  "select_mirror_r2l",
                   "set_mirror_r2l_quantized",
                   "MIRROR_R2L_MIN",
                   "MIRROR_R2L_MAX"
@@ -787,6 +934,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "mirror_l2d",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "mirror_l2d",
@@ -795,6 +946,8 @@
                   "set_mirror_l2d_raw_val",
                   "mirror_l2d_phys_val",
                   "mirror_l2d_multiplexed",
+                  "mirror_l2d_is_active",
+                  "select_mirror_l2d",
                   "set_mirror_l2d_quantized",
                   "MIRROR_L2D_MIN",
                   "MIRROR_L2D_MAX"
@@ -809,6 +962,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "mirror_l2u",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "mirror_l2u",
@@ -817,6 +974,8 @@
                   "set_mirror_l2u_raw_val",
                   "mirror_l2u_phys_val",
                   "mirror_l2u_multiplexed",
+                  "mirror_l2u_is_active",
+                  "select_mirror_l2u",
                   "set_mirror_l2u_quantized",
                   "MIRROR_L2U_MIN",
                   "MIRROR_L2U_MAX"
@@ -831,6 +990,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "mirror_l2r",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "mirror_l2r",
@@ -839,6 +1002,8 @@
                   "set_mirror_l2r_raw_val",
                   "mirror_l2r_phys_val",
                   "mirror_l2r_multiplexed",
+                  "mirror_l2r_is_active",
+                  "select_mirror_l2r",
                   "set_mirror_l2r_quantized",
                   "MIRROR_L2R_MIN",
                   "MIRROR_L2R_MAX"
@@ -853,6 +1018,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "mirror_l2l",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "mirror_l2l",
@@ -861,6 +1030,8 @@
                   "set_mirror_l2l_raw_val",
                   "mirror_l2l_phys_val",
                   "mirror_l2l_multiplexed",
+                  "mirror_l2l_is_active",
+                  "select_mirror_l2l",
                   "set_mirror_l2l_quantized",
                   "MIRROR_L2L_MIN",
                   "MIRROR_L2L_MAX"
@@ -883,6 +1054,7 @@
               "Gateway2"
             ],
             "id": 273,
+            "mux_api": "legacy",
             "ordinal": 15,
             "signals": [
               {
@@ -891,6 +1063,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "voltage",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "voltage",
@@ -899,6 +1075,8 @@
                   "set_voltage_raw_val",
                   "voltage_phys_val",
                   "voltage_multiplexed",
+                  "voltage_is_active",
+                  "select_voltage",
                   "set_voltage_quantized",
                   "VOLTAGE_MIN",
                   "VOLTAGE_MAX"
@@ -913,6 +1091,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "petrol_level",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Dashboard"
                 ],
@@ -923,6 +1105,8 @@
                   "set_petrol_level_raw_val",
                   "petrol_level_phys_val",
                   "petrol_level_multiplexed",
+                  "petrol_level_is_active",
+                  "select_petrol_level",
                   "set_petrol_level_quantized",
                   "PETROL_LEVEL_MIN",
                   "PETROL_LEVEL_MAX"
@@ -937,6 +1121,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "eng_speed",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Dashboard"
                 ],
@@ -947,6 +1135,8 @@
                   "set_eng_speed_raw_val",
                   "eng_speed_phys_val",
                   "eng_speed_multiplexed",
+                  "eng_speed_is_active",
+                  "select_eng_speed",
                   "set_eng_speed_quantized",
                   "ENG_SPEED_MIN",
                   "ENG_SPEED_MAX"
@@ -961,6 +1151,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "car_speed",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Dashboard"
                 ],
@@ -971,6 +1165,8 @@
                   "set_car_speed_raw_val",
                   "car_speed_phys_val",
                   "car_speed_multiplexed",
+                  "car_speed_is_active",
+                  "select_car_speed",
                   "set_car_speed_quantized",
                   "CAR_SPEED_MIN",
                   "CAR_SPEED_MAX"
@@ -985,6 +1181,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "engine_temp",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Dashboard"
                 ],
@@ -995,6 +1195,8 @@
                   "set_engine_temp_raw_val",
                   "engine_temp_phys_val",
                   "engine_temp_multiplexed",
+                  "engine_temp_is_active",
+                  "select_engine_temp",
                   "set_engine_temp_quantized",
                   "ENGINE_TEMP_MIN",
                   "ENGINE_TEMP_MAX"
@@ -1017,6 +1219,7 @@
               "Gateway1"
             ],
             "id": 272,
+            "mux_api": "legacy",
             "ordinal": 16,
             "signals": [
               {
@@ -1025,6 +1228,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "gear",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Dashboard"
                 ],
@@ -1035,6 +1242,8 @@
                   "set_gear_raw_val",
                   "gear_phys_val",
                   "gear_multiplexed",
+                  "gear_is_active",
+                  "select_gear",
                   "set_gear_quantized",
                   "GEAR_MIN",
                   "GEAR_MAX"
@@ -1049,6 +1258,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "engine_running",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [],
                 "reserved_names": [
                   "engine_running",
@@ -1057,6 +1270,8 @@
                   "set_engine_running_raw_val",
                   "engine_running_phys_val",
                   "engine_running_multiplexed",
+                  "engine_running_is_active",
+                  "select_engine_running",
                   "set_engine_running_quantized",
                   "ENGINE_RUNNING_MIN",
                   "ENGINE_RUNNING_MAX"
@@ -1071,6 +1286,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "ig_15",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Dashboard",
                   "Console"
@@ -1082,6 +1301,8 @@
                   "set_ig_15_raw_val",
                   "ig_15_phys_val",
                   "ig_15_multiplexed",
+                  "ig_15_is_active",
+                  "select_ig_15",
                   "set_ig_15_quantized",
                   "IG_15_MIN",
                   "IG_15_MAX"
@@ -1096,6 +1317,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "ig_15r",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Dashboard"
                 ],
@@ -1106,6 +1331,8 @@
                   "set_ig_15r_raw_val",
                   "ig_15r_phys_val",
                   "ig_15r_multiplexed",
+                  "ig_15r_is_active",
+                  "select_ig_15r",
                   "set_ig_15r_quantized",
                   "IG_15R_MIN",
                   "IG_15R_MAX"
@@ -1120,6 +1347,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "starter_key",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Dashboard"
                 ],
@@ -1130,6 +1361,8 @@
                   "set_starter_key_raw_val",
                   "starter_key_phys_val",
                   "starter_key_multiplexed",
+                  "starter_key_is_active",
+                  "select_starter_key",
                   "set_starter_key_quantized",
                   "STARTER_KEY_MIN",
                   "STARTER_KEY_MAX"
@@ -1152,6 +1385,7 @@
               "DebugMsg1"
             ],
             "id": 256,
+            "mux_api": "legacy",
             "ordinal": 17,
             "signals": [
               {
@@ -1160,6 +1394,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "data4",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Gateway"
                 ],
@@ -1170,6 +1408,8 @@
                   "set_data4_raw_val",
                   "data4_phys_val",
                   "data4_multiplexed",
+                  "data4_is_active",
+                  "select_data4",
                   "set_data4_quantized",
                   "DATA4_MIN",
                   "DATA4_MAX"
@@ -1184,6 +1424,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "data3",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Gateway"
                 ],
@@ -1194,6 +1438,8 @@
                   "set_data3_raw_val",
                   "data3_phys_val",
                   "data3_multiplexed",
+                  "data3_is_active",
+                  "select_data3",
                   "set_data3_quantized",
                   "DATA3_MIN",
                   "DATA3_MAX"
@@ -1208,6 +1454,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "data2",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Gateway"
                 ],
@@ -1218,6 +1468,8 @@
                   "set_data2_raw_val",
                   "data2_phys_val",
                   "data2_multiplexed",
+                  "data2_is_active",
+                  "select_data2",
                   "set_data2_quantized",
                   "DATA2_MIN",
                   "DATA2_MAX"
@@ -1232,6 +1484,10 @@
                 "enum_name": null,
                 "enum_variants": [],
                 "field_name": "data1",
+                "mux": {
+                  "parent": null,
+                  "selector": false
+                },
                 "receivers": [
                   "Gateway"
                 ],
@@ -1242,6 +1498,8 @@
                   "set_data1_raw_val",
                   "data1_phys_val",
                   "data1_multiplexed",
+                  "data1_is_active",
+                  "select_data1",
                   "set_data1_quantized",
                   "DATA1_MIN",
                   "DATA1_MAX"
@@ -1276,6 +1534,8 @@
         },
         "policies": {
           "multiplexing": "single unsigned selector; extended/nested definitions rejected",
+          "mux_conditional_access": "guarded_physical_reads_and_writes_unchecked_raw_reads",
+          "mux_selection": "unsigned_wire_bits",
           "physical_special_values": "reject NaN and infinity; raw IEEE bits preserve all patterns",
           "publication": "two-file rollback on I/O failure; verify code_sha256 before reuse",
           "raw_setter": "wire-range-checked; bypasses physical min/max",

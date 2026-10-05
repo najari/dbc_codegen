@@ -160,7 +160,7 @@ impl Config<'_> {
             "input_sha256": hash(source_bytes), "code_sha256": hash(code.as_bytes()),
             "generator_version": env!("CARGO_PKG_VERSION"),
             "generator_revision": env!("DBC_CODEGEN_REVISION"),
-            "generator_source_sha256": hash(concat!(include_str!("lib.rs"), include_str!("utils.rs"), include_str!("signal_type.rs"), include_str!("preparation.rs"), include_str!("artifact.rs"), include_str!("numeric.rs"), include_str!("feature_config.rs"), include_str!("keywords.rs"), include_str!("pad.rs"), include_str!("../Cargo.lock")).as_bytes()),
+            "generator_source_sha256": hash(concat!(include_str!("lib.rs"), include_str!("utils.rs"), include_str!("signal_type.rs"), include_str!("preparation.rs"), include_str!("artifact.rs"), include_str!("numeric.rs"), include_str!("mux.rs"), include_str!("feature_config.rs"), include_str!("keywords.rs"), include_str!("pad.rs"), include_str!("../Cargo.lock")).as_bytes()),
             "options": {
                 "encoding": encoding, "selected_nodes": self.selected_nodes,
                 "physical_f64": self.physical_f64, "rounding": self.rounding,
@@ -172,6 +172,8 @@ impl Config<'_> {
                 "attribute_structs": format!("{:?}", self.attribute_structs)
             },
             "policies": {
+                "mux_selection": "unsigned_wire_bits",
+                "mux_conditional_access": "guarded_physical_reads_and_writes_unchecked_raw_reads",
                 "raw_setter": "wire-range-checked; bypasses physical min/max",
                 "physical_special_values": "reject NaN and infinity; raw IEEE bits preserve all patterns",
                 "zero_range": "[0|0] is enforced when check_ranges is enabled",

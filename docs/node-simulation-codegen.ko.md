@@ -11,7 +11,7 @@
 |---|---|
 | CG-01 | 메시지 타입, 신호 접근자·상수, enum, mux 보조 타입과 공통 이름을 등록한다. 충돌에 결정적인 접미사를 붙인다. enum label 충돌도 별도 variant로 보존한다. 원본 이름·키와 생성 이름을 manifest에 남긴다. 동일 CAN identity의 중복 정의는 모호한 dispatch를 막기 위해 오류로 반환한다. 사용자 지정 attribute 상수의 충돌은 기존처럼 명시적으로 거부한다. |
 | CG-02 | `SIG_VALTYPE_` float32/64의 길이를 검사하고 Intel/Motorola에서 `from_bits`/`to_bits`를 사용한다. 물리 setter는 NaN·Infinity를 거부한다. raw setter는 모든 비트 패턴을 보존한다. unscaled IEEE getter/setter는 signed zero를 보존한다. |
-| CG-03 | 하나의 unscaled unsigned selector와 `mN` 단순 mux를 지원한다. 1비트 selector도 정수 API로 처리한다. 선택된 신호 비트만 복사하므로 1→0 변경이 적용되고, 공통 신호·비활성 영역은 보존된다. `SG_MUL_VAL_`, 중첩·독립 다중 selector는 명시적으로 거부한다. 순환·누락 switch가 포함된 확장 정의도 지원으로 간주하지 않는다. |
+| CG-03 | 기존 단순 unsigned mux API를 유지하며 `SG_MUL_VAL_` 다중 값·범위, 중첩·독립 selector와 signed selector wire 선택을 지원한다. 조건부 getter/setter와 활성 조회를 생성한다. 조상 조건으로 동시 활성 신호 겹침을 검사하고, 누락·순환·모호한 부모 관계를 거부한다. 데이터/selector 쓰기는 해당 비트만 변경한다. 상세 API와 제한은 `extended-multiplexing.ko.md`에 기록한다. |
 | CG-04 | 정수 wire 신호의 `f64` 물리 API와 truncate / nearest-away / exact 정책을 제공한다. 정수 변환은 wire 범위를 검사하며, 정수 물리 계산에는 i128 중간값을 사용한다. 숫자 신호의 `set_*_quantized`는 실제 설정된 물리값을 반환한다. raw setter는 물리 min/max를 우회하지만 wire 폭을 검사한다. `[0\|0]`은 기본 설정에서 0 범위로 유지한다. |
 | CG-05 | 원본 ID를 파서의 u16 축소·확장 비트 masking 전에 검사한다. CAN ID, FD 길이, 1~64비트 폭, bit 범위, 활성 신호 겹침, factor/offset, min/max, mux, value-description 키를 검사한다. 일부 오류에는 원본 행 번호를 포함한다. generation 오류가 기존 파일을 비우지 않는다. |
 | CG-06 | UTF-8/BOM, 명시적인 Windows-1252 및 CP949를 지원한다. 실패 바이트를 replacement 문자로 바꾸거나 인코딩을 추정하지 않는다. 한국어 경로·unit·label을 시험한다. DBC 메시지/신호 식별자의 Unicode 문법은 upstream 파서의 ASCII 문법에 제한되며, 미지원 식별자는 parse 오류로 반환한다. |
@@ -82,6 +82,7 @@ cargo +1.88.0 test --locked -p dbc-codegen --features std --lib `
   --test attribute_structs --test padding_bit_value --test simulation --target-dir target/msrv
 cargo run --locked --example verify_samples -- dbc_samples artifacts/sample-report.json
 python scripts/verify_dll.py --dll C:\Users\admin\codex\asc_parser_engine\engines\dbc\candb.dll
+python scripts/verify_extended_mux.py --dll C:\Users\admin\codex\asc_parser_engine\engines\dbc\candb.dll
 ```
 
 실제 생성물을 rustc로 컴파일하고 실행한다. 1~64비트, signed/unsigned,
@@ -93,10 +94,10 @@ Intel/Motorola의 256조합과 독립적인 비트 배치 결과를 비교한다
 
 로컬 보고서는 다음과 같다.
 
-최종 확인 결과: Rust 1.98.1에서 library/속성/padding/생성물 시험 48개와 CLI
-시험 1개가 통과했다. Rust 1.88.0에서 같은 library 시험 48개 및 CLI check가
+최종 확인 결과: Rust 1.98.1에서 library/속성/padding/생성물 시험 51개와 CLI
+시험 1개가 통과했다. Rust 1.88.0에서 같은 library 시험 51개 및 CLI check가
 통과했다. Clippy `-D warnings`, rustfmt 및 diff whitespace 검사도 통과했다.
-제공된 샘플 88개 중 69개는 생성·컴파일에 성공하고 19개는 명시적으로 거부됐다.
+확장 mux 보완 후 제공된 샘플 88개 중 82개는 생성·컴파일에 성공하고 6개는 명시적으로 거부됐다.
 생성이 허용된 코드의 컴파일 실패는 0개다. Model3CAN의 마지막 거부 사유는
 `GTW_numberHVILNodes`의 wire 범위를 벗어난 `VAL_` 키다. 원본을 자동 수정하지 않았다.
 Comfort 전체 1개와 DLL 비교 12개도 통과했다.
@@ -106,13 +107,16 @@ Comfort 전체 1개와 DLL 비교 12개도 통과했다.
   생성·컴파일과 `Diag_Request`/`DiagRequest` 매핑.
 - `artifacts/dll-report.json`: 생성·컴파일·실행한 12개 payload, literal byte,
   candb.dll의 exact raw·물리값·활성 신호·상태 비교와 DLL hash.
+- `artifacts/extended-mux-report.json`: 확장 mux 샘플 13개의 실제 생성 코드를
+  실행하여 DLL 활성 신호·정확한 wire 값 및 비트 단위 쓰기를 비교한다.
 
 DLL 비교에는 IEEE signed zero의 물리 부호 차이를 기록한다. DLL은 scaling에서
 -0.0을 +0.0으로 바꿀 수 있다. wire 비트는 정확히 비교하며 생성기의 signed zero
 보존은 별도 시험으로 확인한다. 일치한 DLL 결과만을 정확성의 단독 근거로 삼지 않는다.
 
-적용 결과와 제외 이유는 보고서를 기준으로 확인한다. 확장 mux의 일반 지원,
-CANLOG Frame/DLC 어댑터, 노드 시간·상태 시험(V-08/09), 기록·TUI·GUI 시험과
+적용 결과와 제외 이유는 보고서를 기준으로 확인한다. 확장 mux는 단일 부모 관계
+그래프를 지원하며, 음수 mux 키 문법·서로 다른 복수 부모·scaled/IEEE selector는
+지원하지 않는다. CANLOG Frame/DLC 어댑터, 노드 시간·상태 시험(V-08/09), 기록·TUI·GUI 시험과
 전체 upstream snapshot 재승인은 이 생성기 보완의 검증 완료 항목에 포함하지 않는다.
 기존 snapshot은 원본 API를 대상으로 한 자료이므로 새 API의 컴파일 검증은
 합성 fixture 및 제공된 실제 샘플에서 수행했다.

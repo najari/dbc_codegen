@@ -2,10 +2,10 @@
   "dll": "C:\\Users\\admin\\codex\\asc_parser_engine\\engines\\dbc\\candb.dll",
   "dll_sha256": "f27e30791de1fd3ae6aea847c3f84bd3945bf51cdd7d5af71d6b2584f4681dbd",
   "generator_manifest": {
-    "code_sha256": "24af41a03d06adb1609cf51b8d2848bfad415fef98d90a9a8e8ec02e524e6af5",
+    "code_sha256": "37cde6b8116036abc3928ae36006b86c5fc4f953fa4fb68b340c2896af00c918",
     "dbc_name": "simulation.dbc",
-    "generator_revision": "8d0af24f258d356afc8c3a31d7a1f7de04e7209a",
-    "generator_source_sha256": "79fd5e9edf4a1bd15f631b8be808def0f9b41976d1f3f38fa0449714bd182ae0",
+    "generator_revision": "3cfa426af8fb154b443c406c648c619cf457b7a1",
+    "generator_source_sha256": "51f74e6eeae9152a4e6242a6ee1594d160c98c37259afa64bc81ace9b4ea30fd",
     "generator_version": "0.4.0",
     "input_sha256": "9f4a7df9fac7e6238e38c1ca0960b35e714a8245499fab63219cb0783904e423",
     "messages": [
@@ -15,6 +15,7 @@
           "DiagRequest"
         ],
         "id": 100,
+        "mux_api": "legacy",
         "ordinal": 0,
         "signals": [
           {
@@ -23,6 +24,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "raw_dbc_1_1",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -33,6 +38,8 @@
               "set_raw_dbc_1_1_raw_val",
               "raw_dbc_1_1_phys_val",
               "raw_dbc_1_1_multiplexed",
+              "raw_dbc_1_1_is_active",
+              "select_raw_dbc_1_1",
               "set_raw_dbc_1_1_quantized",
               "RAW_DBC_1_1_MIN",
               "RAW_DBC_1_1_MAX"
@@ -55,6 +62,7 @@
           "DiagRequestDbc2N1"
         ],
         "id": 101,
+        "mux_api": "legacy",
         "ordinal": 1,
         "signals": [
           {
@@ -63,6 +71,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "xtype",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -73,6 +85,8 @@
               "set_xtype_raw_val",
               "xtype_phys_val",
               "xtype_multiplexed",
+              "xtype_is_active",
+              "select_xtype",
               "set_xtype_quantized",
               "XTYPE_MIN",
               "XTYPE_MAX"
@@ -95,6 +109,7 @@
           "MessagesDbc3N1"
         ],
         "id": 102,
+        "mux_api": "legacy",
         "ordinal": 2,
         "signals": [
           {
@@ -103,6 +118,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "signal",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -113,6 +132,8 @@
               "set_signal_raw_val",
               "signal_phys_val",
               "signal_multiplexed",
+              "signal_is_active",
+              "select_signal",
               "set_signal_quantized",
               "SIGNAL_MIN",
               "SIGNAL_MAX"
@@ -136,6 +157,7 @@
           "NamesAlpha"
         ],
         "id": 103,
+        "mux_api": "legacy",
         "ordinal": 3,
         "signals": [
           {
@@ -144,6 +166,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "foo_bar",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -154,6 +180,8 @@
               "set_foo_bar_raw_val",
               "foo_bar_phys_val",
               "foo_bar_multiplexed",
+              "foo_bar_is_active",
+              "select_foo_bar",
               "set_foo_bar_quantized",
               "FOO_BAR_MIN",
               "FOO_BAR_MAX"
@@ -168,6 +196,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "foo_bar_dbc_2_1",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -178,6 +210,8 @@
               "set_foo_bar_dbc_2_1_raw_val",
               "foo_bar_dbc_2_1_phys_val",
               "foo_bar_dbc_2_1_multiplexed",
+              "foo_bar_dbc_2_1_is_active",
+              "select_foo_bar_dbc_2_1",
               "set_foo_bar_dbc_2_1_quantized",
               "FOO_BAR_DBC_2_1_MIN",
               "FOO_BAR_DBC_2_1_MAX"
@@ -192,6 +226,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "set_foo_bar_dbc_3_1",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -202,6 +240,8 @@
               "set_set_foo_bar_dbc_3_1_raw_val",
               "set_foo_bar_dbc_3_1_phys_val",
               "set_foo_bar_dbc_3_1_multiplexed",
+              "set_foo_bar_dbc_3_1_is_active",
+              "select_set_foo_bar_dbc_3_1",
               "set_set_foo_bar_dbc_3_1_quantized",
               "SET_FOO_BAR_DBC_3_1_MIN",
               "SET_FOO_BAR_DBC_3_1_MAX"
@@ -216,6 +256,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "foo_bar_raw_val_dbc_4_1",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -226,6 +270,8 @@
               "set_foo_bar_raw_val_dbc_4_1_raw_val",
               "foo_bar_raw_val_dbc_4_1_phys_val",
               "foo_bar_raw_val_dbc_4_1_multiplexed",
+              "foo_bar_raw_val_dbc_4_1_is_active",
+              "select_foo_bar_raw_val_dbc_4_1",
               "set_foo_bar_raw_val_dbc_4_1_quantized",
               "FOO_BAR_RAW_VAL_DBC_4_1_MIN",
               "FOO_BAR_RAW_VAL_DBC_4_1_MAX"
@@ -240,6 +286,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "new_dbc_5_1",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -250,6 +300,8 @@
               "set_new_dbc_5_1_raw_val",
               "new_dbc_5_1_phys_val",
               "new_dbc_5_1_multiplexed",
+              "new_dbc_5_1_is_active",
+              "select_new_dbc_5_1",
               "set_new_dbc_5_1_quantized",
               "NEW_DBC_5_1_MIN",
               "NEW_DBC_5_1_MAX"
@@ -264,6 +316,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "xself",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -274,6 +330,8 @@
               "set_xself_raw_val",
               "xself_phys_val",
               "xself_multiplexed",
+              "xself_is_active",
+              "select_xself",
               "set_xself_quantized",
               "XSELF_MIN",
               "XSELF_MAX"
@@ -301,6 +359,10 @@
               }
             ],
             "field_name": "alpha",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -311,6 +373,8 @@
               "set_alpha_raw_val",
               "alpha_phys_val",
               "alpha_multiplexed",
+              "alpha_is_active",
+              "select_alpha",
               "set_alpha_quantized",
               "ALPHA_MIN",
               "ALPHA_MAX"
@@ -333,6 +397,7 @@
           "NamesAlphaDbc5N1"
         ],
         "id": 104,
+        "mux_api": "legacy",
         "ordinal": 4,
         "signals": [
           {
@@ -341,6 +406,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -351,6 +420,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -373,6 +444,7 @@
           "FloatLe"
         ],
         "id": 105,
+        "mux_api": "legacy",
         "ordinal": 5,
         "signals": [
           {
@@ -381,6 +453,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -391,6 +467,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -413,6 +491,7 @@
           "FloatBe"
         ],
         "id": 106,
+        "mux_api": "legacy",
         "ordinal": 6,
         "signals": [
           {
@@ -421,6 +500,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -431,6 +514,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -453,6 +538,7 @@
           "DoubleLe"
         ],
         "id": 107,
+        "mux_api": "legacy",
         "ordinal": 7,
         "signals": [
           {
@@ -461,6 +547,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -471,6 +561,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -493,6 +585,7 @@
           "DoubleBe"
         ],
         "id": 108,
+        "mux_api": "legacy",
         "ordinal": 8,
         "signals": [
           {
@@ -501,6 +594,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -511,6 +608,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -533,6 +632,7 @@
           "Wide"
         ],
         "id": 109,
+        "mux_api": "legacy",
         "ordinal": 9,
         "signals": [
           {
@@ -541,6 +641,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -551,6 +655,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -573,6 +679,7 @@
           "SignedWide"
         ],
         "id": 110,
+        "mux_api": "legacy",
         "ordinal": 10,
         "signals": [
           {
@@ -581,6 +688,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -591,6 +702,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -613,6 +726,7 @@
           "SignedOne"
         ],
         "id": 111,
+        "mux_api": "legacy",
         "ordinal": 11,
         "signals": [
           {
@@ -621,6 +735,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -631,6 +749,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -653,6 +773,7 @@
           "Narrow"
         ],
         "id": 112,
+        "mux_api": "legacy",
         "ordinal": 12,
         "signals": [
           {
@@ -661,6 +782,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -671,6 +796,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -693,6 +820,7 @@
           "Scaled"
         ],
         "id": 113,
+        "mux_api": "legacy",
         "ordinal": 13,
         "signals": [
           {
@@ -701,6 +829,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -711,6 +843,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -733,6 +867,7 @@
           "Negative"
         ],
         "id": 114,
+        "mux_api": "legacy",
         "ordinal": 14,
         "signals": [
           {
@@ -741,6 +876,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -751,6 +890,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -776,6 +917,7 @@
           "MuxSwitchM2"
         ],
         "id": 115,
+        "mux_api": "legacy",
         "ordinal": 15,
         "signals": [
           {
@@ -784,6 +926,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "switch",
+            "mux": {
+              "parent": null,
+              "selector": true
+            },
             "receivers": [
               "Receiver"
             ],
@@ -794,6 +940,8 @@
               "set_switch_raw_val",
               "switch_phys_val",
               "switch_multiplexed",
+              "switch_is_active",
+              "select_switch",
               "set_switch_quantized",
               "SWITCH_MIN",
               "SWITCH_MAX"
@@ -808,6 +956,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "always",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -818,6 +970,8 @@
               "set_always_raw_val",
               "always_phys_val",
               "always_multiplexed",
+              "always_is_active",
+              "select_always",
               "set_always_quantized",
               "ALWAYS_MIN",
               "ALWAYS_MAX"
@@ -832,6 +986,19 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "a",
+            "mux": {
+              "parent": {
+                "field_name": "switch",
+                "ranges": [
+                  {
+                    "max": 1,
+                    "min": 1
+                  }
+                ],
+                "source_name": "Switch"
+              },
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -842,6 +1009,8 @@
               "set_a_raw_val",
               "a_phys_val",
               "a_multiplexed",
+              "a_is_active",
+              "select_a",
               "set_a_quantized",
               "A_MIN",
               "A_MAX"
@@ -856,6 +1025,19 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "b",
+            "mux": {
+              "parent": {
+                "field_name": "switch",
+                "ranges": [
+                  {
+                    "max": 2,
+                    "min": 2
+                  }
+                ],
+                "source_name": "Switch"
+              },
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -866,6 +1048,8 @@
               "set_b_raw_val",
               "b_phys_val",
               "b_multiplexed",
+              "b_is_active",
+              "select_b",
               "set_b_quantized",
               "B_MIN",
               "B_MAX"
@@ -889,6 +1073,7 @@
           "ChoiceMode"
         ],
         "id": 116,
+        "mux_api": "legacy",
         "ordinal": 16,
         "signals": [
           {
@@ -922,6 +1107,10 @@
               }
             ],
             "field_name": "mode",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -932,6 +1121,8 @@
               "set_mode_raw_val",
               "mode_phys_val",
               "mode_multiplexed",
+              "mode_is_active",
+              "select_mode",
               "set_mode_quantized",
               "MODE_MIN",
               "MODE_MAX"
@@ -954,6 +1145,7 @@
           "ZeroRange"
         ],
         "id": 117,
+        "mux_api": "legacy",
         "ordinal": 17,
         "signals": [
           {
@@ -962,6 +1154,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -972,6 +1168,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -994,6 +1192,7 @@
           "RxOnly"
         ],
         "id": 118,
+        "mux_api": "legacy",
         "ordinal": 18,
         "signals": [
           {
@@ -1002,6 +1201,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "ECU"
             ],
@@ -1012,6 +1215,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -1034,6 +1239,7 @@
           "Unrelated"
         ],
         "id": 119,
+        "mux_api": "legacy",
         "ordinal": 19,
         "signals": [
           {
@@ -1042,6 +1248,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Other"
             ],
@@ -1052,6 +1262,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -1075,6 +1287,7 @@
           "ExtendedSameNumber"
         ],
         "id": 119,
+        "mux_api": "legacy",
         "ordinal": 20,
         "signals": [
           {
@@ -1083,6 +1296,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -1093,6 +1310,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -1118,6 +1337,7 @@
           "OneBitMuxSwitchM1"
         ],
         "id": 120,
+        "mux_api": "legacy",
         "ordinal": 21,
         "signals": [
           {
@@ -1126,6 +1346,10 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "switch",
+            "mux": {
+              "parent": null,
+              "selector": true
+            },
             "receivers": [
               "Receiver"
             ],
@@ -1136,6 +1360,8 @@
               "set_switch_raw_val",
               "switch_phys_val",
               "switch_multiplexed",
+              "switch_is_active",
+              "select_switch",
               "set_switch_quantized",
               "SWITCH_MIN",
               "SWITCH_MAX"
@@ -1150,6 +1376,19 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "a",
+            "mux": {
+              "parent": {
+                "field_name": "switch",
+                "ranges": [
+                  {
+                    "max": 0,
+                    "min": 0
+                  }
+                ],
+                "source_name": "Switch"
+              },
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -1160,6 +1399,8 @@
               "set_a_raw_val",
               "a_phys_val",
               "a_multiplexed",
+              "a_is_active",
+              "select_a",
               "set_a_quantized",
               "A_MIN",
               "A_MAX"
@@ -1174,6 +1415,19 @@
             "enum_name": null,
             "enum_variants": [],
             "field_name": "b",
+            "mux": {
+              "parent": {
+                "field_name": "switch",
+                "ranges": [
+                  {
+                    "max": 1,
+                    "min": 1
+                  }
+                ],
+                "source_name": "Switch"
+              },
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -1184,6 +1438,8 @@
               "set_b_raw_val",
               "b_phys_val",
               "b_multiplexed",
+              "b_is_active",
+              "select_b",
               "set_b_quantized",
               "B_MIN",
               "B_MAX"
@@ -1207,6 +1463,7 @@
           "SignedFaultValue"
         ],
         "id": 121,
+        "mux_api": "legacy",
         "ordinal": 22,
         "signals": [
           {
@@ -1222,6 +1479,10 @@
               }
             ],
             "field_name": "value",
+            "mux": {
+              "parent": null,
+              "selector": false
+            },
             "receivers": [
               "Receiver"
             ],
@@ -1232,6 +1493,8 @@
               "set_value_raw_val",
               "value_phys_val",
               "value_multiplexed",
+              "value_is_active",
+              "select_value",
               "set_value_quantized",
               "VALUE_MIN",
               "VALUE_MAX"
@@ -1268,6 +1531,8 @@
     },
     "policies": {
       "multiplexing": "single unsigned selector; extended/nested definitions rejected",
+      "mux_conditional_access": "guarded_physical_reads_and_writes_unchecked_raw_reads",
+      "mux_selection": "unsigned_wire_bits",
       "physical_special_values": "reject NaN and infinity; raw IEEE bits preserve all patterns",
       "publication": "two-file rollback on I/O failure; verify code_sha256 before reuse",
       "raw_setter": "wire-range-checked; bypasses physical min/max",
