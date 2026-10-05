@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-06",
+  "generator_revision": "8d0af24f258d356afc8c3a31d7a1f7de04e7209a",
+  "generator_source_sha256": "79fd5e9edf4a1bd15f631b8be808def0f9b41976d1f3f38fa0449714bd182ae0",
+  "rust_1_98_1": {
+    "library_tests_passed": 48,
+    "cli_tests_passed": 1,
+    "clippy_warnings_as_errors": "passed"
+  },
+  "rust_1_88_0": {
+    "library_tests_passed": 48,
+    "cli_check": "passed"
+  },
+  "samples": {
+    "total": 88,
+    "compiled": 69,
+    "rejected": 19,
+    "compile_failed": 0
+  },
+  "comfort_compiled": 1,
+  "dll_vectors_passed": 12,
+  "dll_sha256": "f27e30791de1fd3ae6aea847c3f84bd3945bf51cdd7d5af71d6b2584f4681dbd",
+  "source_samples_unchanged": true,
+  "excluded": [
+    "extended/nested mux support",
+    "CANLOG runtime and GUI integration",
+    "upstream snapshot rebaseline"
+  ]
+}

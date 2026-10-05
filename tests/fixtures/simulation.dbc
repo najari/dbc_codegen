@@ -1,0 +1,71 @@
+VERSION "Project-authored generator regression vectors"
+NS_ :
+BS_:
+BU_: ECU Receiver Other
+
+BO_ 100 Diag_Request: 1 ECU
+ SG_ Raw : 0|8@1+ (1,0) [0|255] "" Receiver
+BO_ 101 DiagRequest: 1 ECU
+ SG_ TYPE : 0|8@1+ (1,0) [0|255] "" Receiver
+BO_ 102 Messages: 1 ECU
+ SG_ Signal : 0|8@1+ (1,0) [0|255] "" Receiver
+BO_ 103 Names: 8 ECU
+ SG_ Foo_Bar : 0|8@1+ (1,0) [0|255] "" Receiver
+ SG_ FooBar : 8|8@1+ (1,0) [0|255] "" Receiver
+ SG_ SetFooBar : 16|8@1+ (1,0) [0|255] "" Receiver
+ SG_ FooBarRawVal : 24|8@1+ (1,0) [0|255] "" Receiver
+ SG_ New : 32|8@1+ (1,0) [0|255] "" Receiver
+ SG_ self : 40|8@1+ (1,0) [0|255] "" Receiver
+ SG_ Alpha : 48|8@1+ (1,0) [0|255] "" Receiver
+BO_ 104 NamesAlpha: 1 ECU
+ SG_ Value : 0|8@1+ (1,0) [0|255] "" Receiver
+BO_ 105 FloatLe: 4 ECU
+ SG_ Value : 0|32@1+ (1,0) [-1e30|1e30] "" Receiver
+BO_ 106 FloatBe: 4 ECU
+ SG_ Value : 7|32@0+ (1,0) [-1e30|1e30] "" Receiver
+BO_ 107 DoubleLe: 8 ECU
+ SG_ Value : 0|64@1- (1,0) [-1e300|1e300] "" Receiver
+BO_ 108 DoubleBe: 8 ECU
+ SG_ Value : 7|64@0+ (1,0) [-1e300|1e300] "" Receiver
+BO_ 109 Wide: 8 ECU
+ SG_ Value : 0|64@1+ (1,0) [0|18446744073709551615] "" Receiver
+BO_ 110 SignedWide: 8 ECU
+ SG_ Value : 7|64@0- (1,0) [-9223372036854775808|9223372036854775807] "" Receiver
+BO_ 111 SignedOne: 1 ECU
+ SG_ Value : 0|1@1- (1,0) [-1|0] "" Receiver
+BO_ 112 Narrow: 1 ECU
+ SG_ Value : 0|3@1+ (1,0) [0|7] "" Receiver
+BO_ 113 Scaled: 1 ECU
+ SG_ Value : 0|8@1- (0.5,-10) [-74|53.5] "" Receiver
+BO_ 114 Negative: 1 ECU
+ SG_ Value : 0|8@1+ (-2,10) [-500|10] "" Receiver
+BO_ 115 Mux: 3 ECU
+ SG_ Switch M : 0|2@1+ (1,0) [0|3] "" Receiver
+ SG_ Always : 16|8@1+ (1,0) [0|255] "" Receiver
+ SG_ A m1 : 8|4@1+ (1,0) [0|15] "" Receiver
+ SG_ B m2 : 12|4@1+ (1,0) [0|15] "" Receiver
+BO_ 116 Choice: 1 ECU
+ SG_ Mode : 0|8@1- (2,-10) [-266|244] "" Receiver
+BO_ 117 ZeroRange: 1 ECU
+ SG_ Value : 0|8@1+ (1,0) [0|0] "" Receiver
+BO_ 118 RxOnly: 1 Other
+ SG_ Value : 0|8@1+ (1,0) [0|255] "" ECU
+BO_ 119 Unrelated: 1 Other
+ SG_ Value : 0|8@1+ (1,0) [0|255] "" Other
+BO_ 2147483767 ExtendedSameNumber: 1 ECU
+ SG_ Value : 0|8@1+ (1,0) [0|255] "" Receiver
+BO_ 120 OneBitMux: 2 ECU
+ SG_ Switch M : 0|1@1+ (1,0) [0|1] "" Receiver
+ SG_ A m0 : 8|8@1+ (1,0) [0|255] "" Receiver
+ SG_ B m1 : 8|8@1+ (1,0) [0|255] "" Receiver
+BO_ 121 SignedFault: 1 ECU
+ SG_ Value : 0|8@1- (1,0) [-127|127] "" Receiver
+
+VAL_ 103 Alpha 0 "Off" 1 "On";
+VAL_ 116 Mode -1 "negative" 0 "With space" 1 "With_space" 2 "TYPE";
+VAL_ 121 Value 128 "SNA";
+SIG_VALTYPE_ 105 Value : 1;
+SIG_VALTYPE_ 106 Value : 1;
+SIG_VALTYPE_ 107 Value : 2;
+SIG_VALTYPE_ 108 Value : 2;
+BO_TX_BU_ 119 : ECU,Other;

@@ -25,13 +25,20 @@ std = []
 [dependencies]
 anyhow = "1.0.101"
 can-dbc = "10.0.0"
+can-dbc-pest = "0.8.1"
 heck = "0.5.0"
 prettyplease = "0.3.0"
 quote = "1.0.45"
 syn = "3.0.6"
 typed-builder = "0.23.0"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+tempfile = "3"
+encoding_rs = "0.8"
 
 [dev-dependencies]
+arbitrary = "1.4"
 bitvec = "1.1.1"
 embedded-can = "0.4.1"
 insta = "1.48.0"

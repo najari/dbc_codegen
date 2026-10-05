@@ -1,0 +1,26 @@
+VERSION ""
+
+NS_ :
+
+BS_:
+
+BU_: A B
+
+BO_ 100 M1: 8 A
+ SG_ S1 : 0|8@1+ (1,0) [0|255] "" B
+ SG_ S2 : 8|8@1+ (1,0) [0|255] "" B
+
+EV_ EnvKlemme15: 0 [0|1] "" 0 1 DUMMY_NODE_VECTOR0 Vector__XXX;
+EV_ EnvData: 0 [0|0] "" 0 2 DUMMY_NODE_VECTOR8003 A,B;
+
+ENVVAR_DATA_ EnvData : 4;
+
+CM_ EV_ EnvKlemme15 "Ignition";
+
+BA_DEF_ EV_ "EvAttr" INT 0 10;
+BA_DEF_DEF_ "EvAttr" 0;
+BA_ "EvAttr" EV_ EnvKlemme15 3;
+
+VAL_ EnvKlemme15 0 "Off" 1 "On" ;
+
+SIG_GROUP_ 100 Grp 1 : S1 S2;

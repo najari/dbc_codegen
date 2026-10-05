@@ -27,6 +27,11 @@ cargo install dbc-codegen-cli --git https://github.com/technocreatives/dbc-codeg
 
 ## Using dbc-codegen
 
+This local fork adds validated generation, IEEE wire floats, collision-safe names,
+node filtering and a reproducibility manifest. See the
+[Korean implementation and verification guide](docs/node-simulation-codegen.ko.md)
+for supported scope, API changes and local sample results.
+
 Generate `messages.rs` from `example.dbc` using the CLI:
 
 ```bash

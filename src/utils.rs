@@ -27,8 +27,8 @@ pub fn multiplex_enum_name(msg: &Message, multiplexor: &Signal) -> Result<String
     );
     Ok(format!(
         "{}{}Index",
-        msg.name.to_pascal_case(),
-        multiplexor.name.to_pascal_case(),
+        msg.type_name(),
+        type_name(&multiplexor.name),
     ))
 }
 
@@ -44,8 +44,8 @@ pub fn multiplexed_enum_variant_name(
 
     Ok(format!(
         "{}{}M{switch_index}",
-        msg.name.to_pascal_case(),
-        multiplexor.name.to_pascal_case(),
+        msg.type_name(),
+        type_name(&multiplexor.name),
     ))
 }
 
@@ -74,11 +74,23 @@ pub fn node_field_name(name: &str) -> String {
 }
 
 pub fn sanitize_name(x: &str, prefix: &str, to_case: fn(&str) -> String) -> String {
-    if keywords::is_keyword(x) || !x.starts_with(|c: char| c.is_ascii_alphabetic()) {
+    let mut result = if keywords::is_keyword(x) || !x.starts_with(|c: char| c.is_ascii_alphabetic())
+    {
         format!("{prefix}{}", to_case(x))
     } else {
         to_case(x)
+    };
+    if keywords::is_keyword(&result) {
+        result = format!("{prefix}_{result}");
     }
+    if !is_valid_ident(&result) {
+        prefix.clone_into(&mut result);
+        for c in x.chars() {
+            use std::fmt::Write as _;
+            let _ = write!(result, "u{:x}", u32::from(c));
+        }
+    }
+    result
 }
 
 pub fn type_name(x: &str) -> String {

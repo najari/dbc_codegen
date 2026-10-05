@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Local CANLOG generator changes (2026-10-06)
+
+- Validate original IDs, CAN/FD sizes, signal ranges, overlap and unsupported mux definitions.
+- Allocate deterministic message/signal/enum/helper names; preserve their source mapping.
+- Honor IEEE float32/64, preserve raw bits and reject non-finite physical setters.
+- Check raw widths and quantization; offer f64 and explicit rounding policies.
+- Correct mux branch replacement and signed value-description wire patterns.
+- Add strict encodings, node selection, manifests, rollback publication and cache verification.
+- Add compiled/runtime regression vectors, a local corpus verifier and pinned DLL comparison.
+- API changes: raw setters return Result; value-description enums use raw primitives;
+  physical bound constants use i128/f64. See docs/node-simulation-codegen.ko.md.
+
 ## [0.4.0](https://github.com/oxibus/dbc-codegen/compare/v0.3.0...v0.4.0) - 2026-09-22
 
 ### Added

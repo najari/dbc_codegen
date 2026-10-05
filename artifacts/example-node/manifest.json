@@ -1,0 +1,241 @@
+{
+  "code_sha256": "a491d26a64d2c2ebf98db46c683f9b284d2353ef17bac8f5cc17f81865868b8c",
+  "dbc_name": "example.dbc",
+  "generator_revision": "8d0af24f258d356afc8c3a31d7a1f7de04e7209a",
+  "generator_source_sha256": "79fd5e9edf4a1bd15f631b8be808def0f9b41976d1f3f38fa0449714bd182ae0",
+  "generator_version": "0.4.0",
+  "input_sha256": "2b8740aa930e340ca3c0e060b1349013efb05ede8c78e2b134375af1ca0c2be0",
+  "messages": [
+    {
+      "extended": false,
+      "generated_types": [
+        "TemperatureData"
+      ],
+      "id": 256,
+      "ordinal": 0,
+      "signals": [
+        {
+          "bit_width": 16,
+          "byte_order": "LittleEndian",
+          "enum_name": null,
+          "enum_variants": [],
+          "field_name": "average_temperature",
+          "receivers": [
+            "FanController"
+          ],
+          "reserved_names": [
+            "average_temperature",
+            "set_average_temperature",
+            "average_temperature_raw_val",
+            "set_average_temperature_raw_val",
+            "average_temperature_phys_val",
+            "average_temperature_multiplexed",
+            "set_average_temperature_quantized",
+            "AVERAGE_TEMPERATURE_MIN",
+            "AVERAGE_TEMPERATURE_MAX"
+          ],
+          "source_name": "AverageTemperature",
+          "start_bit": 0,
+          "wire_type": "Unsigned"
+        }
+      ],
+      "size": 8,
+      "source_name": "TemperatureData",
+      "transmitters": [
+        "ClimateController"
+      ],
+      "type_name": "TemperatureData"
+    },
+    {
+      "extended": false,
+      "generated_types": [
+        "FanControl",
+        "FanControlFanMode"
+      ],
+      "id": 257,
+      "ordinal": 1,
+      "signals": [
+        {
+          "bit_width": 8,
+          "byte_order": "LittleEndian",
+          "enum_name": "FanControlFanMode",
+          "enum_variants": [
+            {
+              "canonical_raw_value": 0,
+              "raw_value": 0,
+              "source_label": "Off",
+              "variant_name": "Off"
+            },
+            {
+              "canonical_raw_value": 1,
+              "raw_value": 1,
+              "source_label": "On",
+              "variant_name": "On"
+            },
+            {
+              "canonical_raw_value": 2,
+              "raw_value": 2,
+              "source_label": "Auto",
+              "variant_name": "Auto"
+            }
+          ],
+          "field_name": "fan_mode",
+          "receivers": [
+            "FanController"
+          ],
+          "reserved_names": [
+            "fan_mode",
+            "set_fan_mode",
+            "fan_mode_raw_val",
+            "set_fan_mode_raw_val",
+            "fan_mode_phys_val",
+            "fan_mode_multiplexed",
+            "set_fan_mode_quantized",
+            "FAN_MODE_MIN",
+            "FAN_MODE_MAX"
+          ],
+          "source_name": "FanMode",
+          "start_bit": 0,
+          "wire_type": "Unsigned"
+        },
+        {
+          "bit_width": 8,
+          "byte_order": "LittleEndian",
+          "enum_name": null,
+          "enum_variants": [],
+          "field_name": "target_temperature",
+          "receivers": [
+            "FanController"
+          ],
+          "reserved_names": [
+            "target_temperature",
+            "set_target_temperature",
+            "target_temperature_raw_val",
+            "set_target_temperature_raw_val",
+            "target_temperature_phys_val",
+            "target_temperature_multiplexed",
+            "set_target_temperature_quantized",
+            "TARGET_TEMPERATURE_MIN",
+            "TARGET_TEMPERATURE_MAX"
+          ],
+          "source_name": "TargetTemperature",
+          "start_bit": 8,
+          "wire_type": "Unsigned"
+        }
+      ],
+      "size": 8,
+      "source_name": "FanControl",
+      "transmitters": [
+        "HMI"
+      ],
+      "type_name": "FanControl"
+    },
+    {
+      "extended": false,
+      "generated_types": [
+        "FanStatus",
+        "FanStatusFanActive"
+      ],
+      "id": 258,
+      "ordinal": 2,
+      "signals": [
+        {
+          "bit_width": 16,
+          "byte_order": "LittleEndian",
+          "enum_name": null,
+          "enum_variants": [],
+          "field_name": "fan_speed",
+          "receivers": [
+            "ClimateController",
+            "HMI"
+          ],
+          "reserved_names": [
+            "fan_speed",
+            "set_fan_speed",
+            "fan_speed_raw_val",
+            "set_fan_speed_raw_val",
+            "fan_speed_phys_val",
+            "fan_speed_multiplexed",
+            "set_fan_speed_quantized",
+            "FAN_SPEED_MIN",
+            "FAN_SPEED_MAX"
+          ],
+          "source_name": "FanSpeed",
+          "start_bit": 0,
+          "wire_type": "Unsigned"
+        },
+        {
+          "bit_width": 1,
+          "byte_order": "LittleEndian",
+          "enum_name": "FanStatusFanActive",
+          "enum_variants": [
+            {
+              "canonical_raw_value": 0,
+              "raw_value": 0,
+              "source_label": "Off",
+              "variant_name": "Off"
+            },
+            {
+              "canonical_raw_value": 1,
+              "raw_value": 1,
+              "source_label": "On",
+              "variant_name": "On"
+            }
+          ],
+          "field_name": "fan_active",
+          "receivers": [
+            "ClimateController",
+            "HMI"
+          ],
+          "reserved_names": [
+            "fan_active",
+            "set_fan_active",
+            "fan_active_raw_val",
+            "set_fan_active_raw_val",
+            "fan_active_phys_val",
+            "fan_active_multiplexed",
+            "set_fan_active_quantized",
+            "FAN_ACTIVE_MIN",
+            "FAN_ACTIVE_MAX"
+          ],
+          "source_name": "FanActive",
+          "start_bit": 16,
+          "wire_type": "Unsigned"
+        }
+      ],
+      "size": 8,
+      "source_name": "FanStatus",
+      "transmitters": [
+        "FanController"
+      ],
+      "type_name": "FanStatus"
+    }
+  ],
+  "options": {
+    "allow_dead_code": false,
+    "attribute_structs": "[]",
+    "check_ranges": "always",
+    "debug_prints": false,
+    "encoding": "utf8",
+    "impl_arbitrary": "never",
+    "impl_debug": "never",
+    "impl_defmt": "never",
+    "impl_embedded_can_frame": "always",
+    "impl_error": "never",
+    "impl_serde": "never",
+    "padding_bit_value": false,
+    "physical_f64": true,
+    "rounding": "nearest_away",
+    "selected_nodes": [
+      "FanController"
+    ]
+  },
+  "policies": {
+    "multiplexing": "single unsigned selector; extended/nested definitions rejected",
+    "physical_special_values": "reject NaN and infinity; raw IEEE bits preserve all patterns",
+    "publication": "two-file rollback on I/O failure; verify code_sha256 before reuse",
+    "raw_setter": "wire-range-checked; bypasses physical min/max",
+    "zero_range": "[0|0] is enforced when check_ranges is enabled"
+  },
+  "schema_version": 1
+}

@@ -7,14 +7,16 @@
     doc = "Documentation is only available with the `std` feature."
 )]
 
+mod artifact;
 mod feature_config;
 mod keywords;
+mod numeric;
 mod pad;
+mod preparation;
 mod signal_type;
 mod utils;
 
-use std::collections::{BTreeMap, BTreeSet, HashMap};
-use std::fs::OpenOptions;
+use std::collections::{BTreeMap, BTreeSet};
 use std::io::{BufWriter, Write};
 use std::path::Path;
 
@@ -32,8 +34,11 @@ use heck::ToSnakeCase;
 use quote::ToTokens;
 use typed_builder::TypedBuilder;
 
+pub use crate::artifact::{GeneratedArtifacts, InputEncoding, decode_input};
 pub use crate::feature_config::FeatureConfig;
+use crate::numeric::render_wire_check;
 use crate::pad::PadAdapter;
+pub use crate::preparation::RoundingPolicy;
 use crate::signal_type::{IntSize, ValType};
 use crate::utils::{
     MessageExt as _, SignalExt as _, enum_name, enum_variant_name, is_screaming_snake_case,
@@ -55,6 +60,7 @@ static ALLOW_LINTS: &str = r"#[allow(
 /// Code generator configuration. See module-level docs for an example.
 #[derive(TypedBuilder)]
 #[non_exhaustive]
+#[allow(clippy::struct_excessive_bools)] // Independent, backwards-compatible generation toggles.
 pub struct Config<'a> {
     /// Name of the dbc-file. Used for generated docs only.
     pub dbc_name: &'a str,
@@ -107,6 +113,18 @@ pub struct Config<'a> {
     /// Default: empty.
     #[builder(default)]
     pub attribute_structs: &'a [AttributeStruct<'a>],
+
+    /// Select transmitting and receiving messages for these nodes; empty selects all.
+    #[builder(default)]
+    pub selected_nodes: &'a [&'a str],
+
+    /// Use f64 for physical integer-wire signals (except bools, enums and selectors).
+    #[builder(default)]
+    pub physical_f64: bool,
+
+    /// Integer-wire quantization policy. Default: truncate toward zero.
+    #[builder(default)]
+    pub rounding: RoundingPolicy,
 }
 
 /// A user-defined struct that [`Config`] fills from DBC attributes and emits as an
@@ -199,14 +217,16 @@ impl Config<'_> {
     /// Write Rust structs matching DBC input description to `out` buffer
     fn codegen(&self, out: impl Write) -> Result<()> {
         self.validate_attribute_structs()?;
-        let dbc = Dbc::try_from(self.dbc_content).map_err(|e| {
+        preparation::validate_source_ids(self.dbc_content.trim_start_matches('\u{feff}'))?;
+        let dbc = Dbc::try_from(self.dbc_content.trim_start_matches('\u{feff}')).map_err(|e| {
             let msg = "Could not parse dbc file";
             if self.debug_prints {
                 anyhow!("{msg}: {e:#?}")
             } else {
-                anyhow!("{msg}")
+                anyhow!("{msg}: {e}")
             }
         })?;
+        let (dbc, _) = preparation::prepare(&dbc, self)?;
         if self.debug_prints {
             eprintln!("{dbc:#?}");
         }
@@ -382,13 +402,19 @@ impl Config<'_> {
             Self::render_cycle_time(&mut w, msg, dbc)?;
 
             for signal in &msg.signals {
-                let typ = ValType::from_signal(signal);
-                if typ != ValType::Bool {
+                let typ = self.physical_type(dbc, msg, signal);
+                if typ != "bool" {
                     let sig = signal.field_name().to_uppercase();
-                    let min = signal.min;
-                    let max = signal.max;
-                    writeln!(w, "pub const {sig}_MIN: {typ} = {min}_{typ};")?;
-                    writeln!(w, "pub const {sig}_MAX: {typ} = {max}_{typ};")?;
+                    if typ == "f32" || typ == "f64" {
+                        let min = signal.min;
+                        let max = signal.max;
+                        writeln!(w, "pub const {sig}_MIN: f64 = {min}_f64;")?;
+                        writeln!(w, "pub const {sig}_MAX: f64 = {max}_f64;")?;
+                    } else {
+                        let (min, max) = numeric::integer_physical_bounds(signal)?;
+                        writeln!(w, "pub const {sig}_MIN: i128 = {min}_i128;")?;
+                        writeln!(w, "pub const {sig}_MAX: i128 = {max}_i128;")?;
+                    }
                 }
             }
             writeln!(w)?;
@@ -406,7 +432,7 @@ impl Config<'_> {
                 .filter_map(|signal| {
                     if matches!(signal.multiplexer_indicator, Plain | Multiplexor) {
                         let field = signal.field_name();
-                        let typ = signal_pub_type(dbc, msg, signal);
+                        let typ = self.public_type(dbc, msg, signal);
                         Some(format!("{field}: {typ}"))
                     } else {
                         None
@@ -824,6 +850,9 @@ impl Config<'_> {
         dbc: &Dbc,
         msg: &Message,
     ) -> Result<()> {
+        if let Some(typ) = self.float_type(dbc, msg, signal) {
+            return self.render_float_signal(w, signal, dbc, msg, typ);
+        }
         writeln!(w, "/// Returns the value of `{}`.", signal.name)?;
         if let Some(comment) = dbc.signal_comment(msg.id, &signal.name) {
             writeln!(w, "///")?;
@@ -854,22 +883,14 @@ impl Config<'_> {
         writeln!(w, "#[inline(always)]")?;
         if let Some(variants) = variants {
             let type_name = enum_name(msg, signal);
-            let signal_ty = ValType::from_signal(signal);
-            let variant_infos = generate_variant_info(variants, signal_ty);
+            let signal_ty = ValType::from_signal_int(signal);
+            let variant_infos = generate_variant_info(variants, signal);
 
             writeln!(w, "pub fn {fn_name}(&self) -> {type_name} {{")?;
             {
                 let mut w = PadAdapter::wrap(w);
 
-                // Use signed type for loading when signal is signed and has negative values
-                let has_negative_values = variants.iter().any(|v| v.id < 0);
-                let load_type = if signal.value_type == Signed && has_negative_values {
-                    signal_ty
-                } else {
-                    ValType::from_signal_uint(signal)
-                };
-
-                let read = read_fn_with_type(signal, msg, load_type)?;
+                let read = read_fn_with_type(signal, msg, signal_ty)?;
                 writeln!(w, r"let signal = {read};")?;
                 writeln!(w)?;
                 writeln!(w, "match signal {{")?;
@@ -878,14 +899,7 @@ impl Config<'_> {
                     for info in &variant_infos {
                         let literal = info.value;
                         let variant = &info.base_name;
-                        match info.dup_type {
-                            DuplicateType::Unique => {
-                                writeln!(w, "{literal} => {type_name}::{variant},")?;
-                            }
-                            DuplicateType::FirstDuplicate | DuplicateType::Duplicate => {
-                                writeln!(w, "{literal} => {type_name}::{variant}({literal}),")?;
-                            }
-                        }
+                        writeln!(w, "{literal} => {type_name}::{variant},")?;
                     }
                     writeln!(w, "_ => {type_name}::_Other(self.{fn_name}_phys_val()),")?;
                 }
@@ -896,11 +910,11 @@ impl Config<'_> {
 
             // Private helper for the `_Other()` fallback above.
             writeln!(w, "#[inline(always)]")?;
-            let typ = ValType::from_signal(signal);
+            let typ = ValType::from_signal_int(signal);
             writeln!(w, "fn {fn_name}_phys_val(&self) -> {typ} {{")?;
             {
                 let mut w = PadAdapter::wrap(w);
-                signal_from_payload(&mut w, signal, msg).context("signal from payload")?;
+                writeln!(w, "self.{fn_name}_raw_val()")?;
             }
             writeln!(w, "}}")?;
             writeln!(w)?;
@@ -929,6 +943,9 @@ impl Config<'_> {
         dbc: &Dbc,
         msg: &Message,
     ) -> Result<()> {
+        if let Some(typ) = self.float_type(dbc, msg, signal) {
+            return self.render_float_setter(w, signal, dbc, msg, typ);
+        }
         // To avoid accidentally changing the multiplexor value without changing
         // the signals accordingly this fn is kept private for multiplexors.
         let visibility = if signal.multiplexer_indicator == Multiplexor {
@@ -953,13 +970,41 @@ impl Config<'_> {
             // Enum-backed signals accept the value-description enum; convert it to
             // the raw primitive before range checks and packing.
             if is_enum_backed {
-                writeln!(w, "let value = {typ}::from(value);")?;
+                let raw_type = ValType::from_signal_int(signal);
+                writeln!(w, "let value = {raw_type}::from(value);")?;
+                render_wire_check(&mut w, signal, msg, "i128::from(value)")?;
+                if !matches!(self.check_ranges, FeatureConfig::Never) {
+                    if let FeatureConfig::Gated(g) = self.check_ranges {
+                        writeln!(w, "#[cfg(feature = {g:?})]")?;
+                    }
+                    writeln!(
+                        w,
+                        "{{ let physical = value as f64 * {}_f64 + {}_f64; if physical < {}_f64 || physical > {}_f64 {{ return Err(CanError::ParameterOutOfRange {{ message_id: {}::MESSAGE_ID }}); }} }}",
+                        signal.factor,
+                        signal.offset,
+                        signal.min,
+                        signal.max,
+                        msg.type_name()
+                    )?;
+                }
+                pack_bits(&mut w, signal, msg)?;
+                writeln!(w, "Ok(())")?;
+            } else {
+                self.render_set_signal_body(&mut w, signal, msg)?;
             }
-            self.render_set_signal_body(&mut w, signal, msg)?;
         }
         writeln!(w, "}}")?;
         writeln!(w)?;
-
+        if !is_enum_backed && signal.multiplexer_indicator != Multiplexor {
+            writeln!(
+                w,
+                "/// Sets a value and returns its actual quantized physical value."
+            )?;
+            writeln!(
+                w,
+                "pub fn set_{field}_quantized(&mut self, value: {param_type}) -> Result<{typ}, CanError> {{ self.set_{field}(value)?; Ok(self.{field}()) }}"
+            )?;
+        }
         Ok(())
     }
 
@@ -969,16 +1014,30 @@ impl Config<'_> {
         signal: &Signal,
         msg: &Message,
     ) -> Result<()> {
-        if signal.size != 1 {
+        if ValType::from_signal(signal) == ValType::Bool {
+            if let FeatureConfig::Gated(gate) = self.check_ranges {
+                writeln!(w, "#[cfg(feature = {gate:?})]")?;
+            }
+            if !matches!(self.check_ranges, FeatureConfig::Never) {
+                writeln!(
+                    w,
+                    "if (value as u8 as f64) < {}_f64 || (value as u8 as f64) > {}_f64 {{ return Err(CanError::ParameterOutOfRange {{ message_id: {}::MESSAGE_ID }}); }}",
+                    signal.min,
+                    signal.max,
+                    msg.type_name()
+                )?;
+            }
+        } else {
             if let FeatureConfig::Gated(gate) = self.check_ranges {
                 writeln!(w, r"#[cfg(feature = {gate:?})]")?;
             }
 
             if let FeatureConfig::Gated(..) | FeatureConfig::Always = self.check_ranges {
-                let typ = ValType::from_signal(signal);
-                let min = signal.min;
-                let max = signal.max;
-                writeln!(w, r"if value < {min}_{typ} || {max}_{typ} < value {{")?;
+                let (min, max) = numeric::integer_physical_bounds(signal)?;
+                writeln!(
+                    w,
+                    r"if i128::from(value) < {min}_i128 || {max}_i128 < i128::from(value) {{"
+                )?;
 
                 {
                     let mut w = PadAdapter::wrap(&mut *w);
@@ -992,7 +1051,8 @@ impl Config<'_> {
                 writeln!(w, r"}}")?;
             }
         }
-        signal_to_payload(&mut *w, signal, msg).context("signal to payload")?;
+        signal_to_payload(&mut *w, signal, msg, self.rounding, &self.check_ranges)
+            .context("signal to payload")?;
 
         Ok(())
     }
@@ -1081,10 +1141,9 @@ impl Config<'_> {
         variants: &[ValDescription],
     ) -> Result<()> {
         let type_name = enum_name(msg, signal);
-        let signal_ty = ValType::from_signal(signal);
+        let signal_ty = ValType::from_signal_int(signal);
 
-        // Generate variant info to handle duplicates with tuple variants
-        let variant_infos = generate_variant_info(variants, signal_ty);
+        let variant_infos = generate_variant_info(variants, signal);
 
         writeln!(w, "/// Defined values for {}", signal.name)?;
         writeln!(w, "{ALLOW_LINTS}")?;
@@ -1099,13 +1158,7 @@ impl Config<'_> {
             let mut w = PadAdapter::wrap(w);
             for info in &variant_infos {
                 let variant = &info.base_name;
-                match info.dup_type {
-                    DuplicateType::Unique => writeln!(w, "{variant},")?,
-                    DuplicateType::FirstDuplicate => {
-                        writeln!(w, "{variant}({}),", info.value_type)?;
-                    }
-                    DuplicateType::Duplicate => {}
-                }
+                writeln!(w, "{variant},")?;
             }
             writeln!(w, "_Other({signal_ty}),")?;
         }
@@ -1114,11 +1167,7 @@ impl Config<'_> {
 
         writeln!(w, "impl From<{type_name}> for {signal_ty} {{")?;
         {
-            let match_on_raw_type = match ValType::from_signal(signal) {
-                ValType::Bool => |x: i64| format!("{}", x == 1),
-                ValType::F32 => |x: i64| format!("{x}_f32"),
-                _ => |x: i64| format!("{x}"),
-            };
+            let match_on_raw_type = |x: i64| format!("{x}");
 
             let mut w = PadAdapter::wrap(w);
             writeln!(w, "fn from(val: {type_name}) -> {signal_ty} {{")?;
@@ -1128,16 +1177,8 @@ impl Config<'_> {
                 {
                     let mut w = PadAdapter::wrap(&mut w);
                     for info in &variant_infos {
-                        match info.dup_type {
-                            DuplicateType::Unique => {
-                                let literal = match_on_raw_type(info.value);
-                                writeln!(w, "{type_name}::{} => {literal},", info.base_name)?;
-                            }
-                            DuplicateType::FirstDuplicate => {
-                                writeln!(w, "{type_name}::{}(v) => v,", info.base_name)?;
-                            }
-                            DuplicateType::Duplicate => {}
-                        }
+                        let literal = match_on_raw_type(info.value);
+                        writeln!(w, "{type_name}::{} => {literal},", info.base_name)?;
                     }
                     writeln!(w, "{type_name}::_Other(x) => x,")?;
                 }
@@ -1169,10 +1210,15 @@ fn render_set_signal_multiplexer(
     {
         let mut w = PadAdapter::wrap(w);
 
-        writeln!(w, "let b0 = BitArray::<_, LocalBits>::new(self.raw);")?;
-        writeln!(w, "let b1 = BitArray::<_, LocalBits>::new(value.raw);")?;
-        writeln!(w, "self.raw = b0.bitor(b1).into_inner();")?;
         writeln!(w, "self.set_{}({switch_index})?;", multiplexor.field_name())?;
+        writeln!(w, "let source_raw = value.raw;")?;
+        for s in &msg.signals {
+            if s.multiplexer_indicator == MultiplexedSignal(switch_index) {
+                let read = read_fn(s, msg)?.replace("self.raw", "source_raw");
+                writeln!(w, "let value = {read};")?;
+                pack_bits(&mut w, s, msg)?;
+            }
+        }
         writeln!(w, "Ok(())")?;
     }
 
@@ -1253,7 +1299,7 @@ fn is_unscaled(signal: &Signal) -> bool {
 fn signal_from_payload(w: &mut impl Write, signal: &Signal, msg: &Message) -> Result<()> {
     if is_unscaled(signal) {
         let field = signal.field_name();
-        if signal.size == 1 {
+        if ValType::from_signal(signal) == ValType::Bool {
             writeln!(w, "self.{field}_raw_val() == 1")?;
         } else {
             writeln!(w, "self.{field}_raw_val()")?;
@@ -1318,7 +1364,13 @@ fn read_fn_with_type(signal: &Signal, msg: &Message, typ: ValType) -> Result<Str
     })
 }
 
-fn signal_to_payload(w: &mut impl Write, signal: &Signal, msg: &Message) -> Result<()> {
+fn signal_to_payload(
+    w: &mut impl Write,
+    signal: &Signal,
+    msg: &Message,
+    rounding: RoundingPolicy,
+    check_ranges: &FeatureConfig<'_>,
+) -> Result<()> {
     let typ = ValType::from_signal(signal);
     match typ {
         ValType::Bool => {
@@ -1337,21 +1389,58 @@ fn signal_to_payload(w: &mut impl Write, signal: &Signal, msg: &Message) -> Resu
             // `value` is already the raw type.
         }
         _ => {
-            writeln!(w, "let factor = {};", signal.factor)?;
-            if signal.offset >= 0.0 {
-                writeln!(w, "let value = value.checked_sub({})", signal.offset)?;
-            } else {
-                writeln!(w, "let value = value.checked_add({})", signal.offset.abs())?;
-            }
+            writeln!(w, "let factor = {}_i128;", signal.factor)?;
+            writeln!(
+                w,
+                "let value = i128::from(value).checked_sub({}_i128)",
+                signal.offset
+            )?;
             writeln!(
                 w,
                 "    .ok_or(CanError::ParameterOutOfRange {{ message_id: {}::MESSAGE_ID }})?;",
                 msg.type_name(),
             )?;
             let typ = ValType::from_signal_int(signal);
-            writeln!(w, "let value = (value / factor) as {typ};")?;
+            match rounding {
+                RoundingPolicy::Truncate => writeln!(w, "let value = value / factor;")?,
+                RoundingPolicy::Exact => {
+                    writeln!(
+                        w,
+                        "if value % factor != 0 {{ return Err(CanError::ParameterOutOfRange {{ message_id: Self::MESSAGE_ID }}); }}"
+                    )?;
+                    writeln!(w, "let value = value / factor;")?;
+                }
+                RoundingPolicy::NearestAway => {
+                    writeln!(w, "let quotient = value / factor;")?;
+                    writeln!(w, "let remainder = value % factor;")?;
+                    writeln!(
+                        w,
+                        "let value = quotient + if remainder.abs() * 2 >= factor.abs() {{ value.signum() * factor.signum() }} else {{ 0 }};"
+                    )?;
+                }
+            }
+            render_wire_check(w, signal, msg, "value")?;
+            writeln!(
+                w,
+                "let value = {typ}::try_from(value).map_err(|_| CanError::ParameterOutOfRange {{ message_id: Self::MESSAGE_ID }})?;"
+            )?;
+            if !matches!(check_ranges, FeatureConfig::Never) {
+                if let FeatureConfig::Gated(g) = check_ranges {
+                    writeln!(w, "#[cfg(feature = {g:?})]")?;
+                }
+                let (min, max) = numeric::integer_physical_bounds(signal)?;
+                writeln!(
+                    w,
+                    "{{ let actual = i128::from(value).checked_mul(factor).and_then(|x| x.checked_add({}_i128)).ok_or(CanError::ParameterOutOfRange {{ message_id: Self::MESSAGE_ID }})?; if actual < {min}_i128 || actual > {max}_i128 {{ return Err(CanError::ParameterOutOfRange {{ message_id: Self::MESSAGE_ID }}); }} }}",
+                    signal.offset
+                )?;
+            }
             writeln!(w)?;
         }
+    }
+
+    if !matches!(typ, ValType::Bool) && is_unscaled(signal) {
+        render_wire_check(w, signal, msg, "i128::from(value)")?;
     }
 
     pack_bits(w, signal, msg)?;
@@ -1423,11 +1512,13 @@ fn render_raw_accessors(w: &mut impl Write, signal: &Signal, msg: &Message) -> R
     writeln!(w, "#[inline(always)]")?;
     writeln!(
         w,
-        "{visibility}fn set_{field}_raw_val(&mut self, value: {typ}) {{",
+        "{visibility}fn set_{field}_raw_val(&mut self, value: {typ}) -> Result<(), CanError> {{",
     )?;
     {
         let mut w = PadAdapter::wrap(&mut *w);
+        render_wire_check(&mut w, signal, msg, "i128::from(value)")?;
         pack_bits(&mut w, signal, msg)?;
+        writeln!(w, "Ok(())")?;
     }
     writeln!(w, "}}")?;
     writeln!(w)?;
@@ -1435,58 +1526,32 @@ fn render_raw_accessors(w: &mut impl Write, signal: &Signal, msg: &Message) -> R
     Ok(())
 }
 
-enum DuplicateType {
-    Unique,
-    FirstDuplicate,
-    Duplicate,
-}
-
 /// Variant info for enum generation
 struct VariantInfo {
     base_name: String,
     value: i64,
-    dup_type: DuplicateType,
-    value_type: String,
 }
 
 /// Generate variant info for enum generation.
-/// For duplicates, uses tuple variants like `Reserved(u8)` instead of separate variants.
-fn generate_variant_info(variants: &[ValDescription], signal_ty: ValType) -> Vec<VariantInfo> {
-    // First pass: count occurrences of each base name
-    let mut name_counts: HashMap<String, usize> = HashMap::new();
-    for variant in variants {
-        let base_name = enum_variant_name(&variant.description);
-        name_counts
-            .entry(base_name)
-            .and_modify(|c| *c = c.saturating_add(1))
-            .or_insert(1);
-    }
-
-    // Second pass: generate variant info
-    let mut variant_infos = Vec::new();
-    let mut seen_names: HashMap<String, usize> = HashMap::new();
-    for variant in variants {
-        let base_name = enum_variant_name(&variant.description);
-        let count = name_counts.get(&base_name).copied().unwrap_or(0);
-        let seen_count = seen_names.entry(base_name.clone()).or_insert(0);
-        *seen_count = (*seen_count).saturating_add(1);
-
-        let dup_type = if count == 1 {
-            DuplicateType::Unique
-        } else if *seen_count == 1 {
-            DuplicateType::FirstDuplicate
-        } else {
-            DuplicateType::Duplicate
-        };
-
-        variant_infos.push(VariantInfo {
-            base_name,
-            value: variant.id,
-            dup_type,
-            value_type: signal_ty.to_string(),
-        });
-    }
-    variant_infos
+/// Each DBC key keeps a distinct variant with a deterministic collision suffix.
+fn generate_variant_info(variants: &[ValDescription], signal: &Signal) -> Vec<VariantInfo> {
+    let mut registry = BTreeSet::from(["_Other".to_owned()]);
+    variants
+        .iter()
+        .map(|v| {
+            let base = enum_variant_name(&v.description);
+            let mut name = base.clone();
+            let mut ordinal = 0usize;
+            while !registry.insert(name.clone()) {
+                ordinal = ordinal.saturating_add(1);
+                name = format!("{base}Dbc{ordinal}");
+            }
+            VariantInfo {
+                base_name: name,
+                value: preparation::canonical_variant_value(v.id, signal),
+            }
+        })
+        .collect()
 }
 
 impl Config<'_> {
@@ -1673,13 +1738,21 @@ impl Config<'_> {
             self.impl_defmt.fmt_attr(w, "derive(defmt::Format)")?;
             self.impl_serde.fmt_attr(w, "derive(Serialize)")?;
             self.impl_serde.fmt_attr(w, "derive(Deserialize)")?;
-            writeln!(w, r"#[derive(Default)]")?;
             writeln!(w, "pub struct {struct_name} {{ raw: [u8; {}] }}", msg.size)?;
+            writeln!(
+                w,
+                "impl Default for {struct_name} {{ fn default() -> Self {{ Self::new() }} }}"
+            )?;
             writeln!(w)?;
 
             writeln!(w, "{ALLOW_LINTS}")?;
             self.write_allow_dead_code(w)?;
             writeln!(w, "impl {struct_name} {{")?;
+            writeln!(
+                w,
+                "pub const MESSAGE_ID: Id = {}::MESSAGE_ID;",
+                msg.type_name()
+            )?;
 
             writeln!(
                 w,
@@ -1723,7 +1796,27 @@ impl Config<'_> {
                         w,
                         "let {field_name} = {arbitrary_value};",
                         field_name = signal.field_name(),
-                        arbitrary_value = signal_to_arbitrary(signal),
+                        arbitrary_value = if signal.multiplexer_indicator != Multiplexor
+                            && dbc
+                                .value_descriptions_for_signal(msg.id, &signal.name)
+                                .is_some()
+                        {
+                            let typ = ValType::from_signal_int(signal);
+                            let (min, max) = numeric::wire_bounds(signal);
+                            format!("u.int_in_range({min}_{typ}..={max}_{typ})?")
+                        } else if let Some(typ) = self.float_type(dbc, msg, signal) {
+                            let method = if typ == "f64" {
+                                "float64_in_range"
+                            } else {
+                                "float_in_range"
+                            };
+                            format!(
+                                "u.{method}(({}_f64 as {typ})..=({}_f64 as {typ}))?",
+                                signal.min, signal.max
+                            )
+                        } else {
+                            signal_to_arbitrary(signal)
+                        },
                     )?;
                 }
 
@@ -1731,8 +1824,8 @@ impl Config<'_> {
                     .iter()
                     .map(|signal| {
                         let field = signal.field_name();
-                        let is_enum_backed = signal_pub_type(dbc, msg, signal)
-                            != ValType::from_signal(signal).to_string();
+                        let is_enum_backed = self.public_type(dbc, msg, signal)
+                            != self.physical_type(dbc, msg, signal);
                         if is_enum_backed {
                             format!("{}::_Other({field})", enum_name(msg, signal))
                         } else {
@@ -1797,6 +1890,7 @@ impl core::fmt::Display for CanError {
             self.write_allow_dead_code(w)?;
             writeln!(w, "trait UnstructuredFloatExt {{")?;
             writeln!(w, "    fn float_in_range(&mut self, range: core::ops::RangeInclusive<f32>) -> arbitrary::Result<f32>;")?;
+            writeln!(w, "    fn float64_in_range(&mut self, range: core::ops::RangeInclusive<f64>) -> arbitrary::Result<f64>;")?;
             writeln!(w, "}}")?;
             writeln!(w)?;
             Ok::<_, Error>(())
@@ -1804,15 +1898,15 @@ impl core::fmt::Display for CanError {
 
         self.impl_arbitrary.fmt_cfg(w, |w| {
             writeln!(w, "impl UnstructuredFloatExt for arbitrary::Unstructured<'_> {{")?;
-            writeln!(w, "    fn float_in_range(&mut self, range: core::ops::RangeInclusive<f32>) -> arbitrary::Result<f32> {{")?;
-            writeln!(w, "        let min = range.start();")?;
-            writeln!(w, "        let max = range.end();")?;
-            writeln!(w, "        let steps = u32::MAX;")?;
-            writeln!(w, "        let factor = (max - min) / (steps as f32);")?;
-            writeln!(w, "        let random_int: u32 = self.int_in_range(0..=steps)?;")?;
-            writeln!(w, "        let random = min + factor * (random_int as f32);")?;
-            writeln!(w, "        Ok(random)")?;
-            writeln!(w, "    }}")?;
+            for (typ, method) in [("f32", "float_in_range"), ("f64", "float64_in_range")] {
+                writeln!(w, "    fn {method}(&mut self, range: core::ops::RangeInclusive<{typ}>) -> arbitrary::Result<{typ}> {{")?;
+                writeln!(w, "        let min = range.start().max({typ}::MIN);")?;
+                writeln!(w, "        let max = range.end().min({typ}::MAX);")?;
+                writeln!(w, "        let random_int: u32 = self.int_in_range(0..=u32::MAX)?;")?;
+                writeln!(w, "        let fraction = (random_int as {typ}) / (u32::MAX as {typ});")?;
+                writeln!(w, "        Ok(min * (1.0 - fraction) + max * fraction)")?;
+                writeln!(w, "    }}")?;
+            }
             writeln!(w, "}}")?;
             writeln!(w)?;
             Ok::<_, Error>(())
@@ -1958,7 +2052,7 @@ fn message_cycle_time_ms(dbc: &Dbc, id: MessageId) -> Option<u32> {
 
 impl Config<'_> {
     /// Generate Rust structs matching DBC input description and return as String
-    pub fn generate(self) -> Result<String> {
+    pub fn generate(&self) -> Result<String> {
         let mut out = Vec::new();
         self.codegen(&mut out)
             .context("could not generate Rust code")?;
@@ -1978,13 +2072,17 @@ impl Config<'_> {
 
     /// Generate Rust structs matching DBC input description and write to file at `path`
     pub fn write_to_file<P: AsRef<Path>>(self, path: P) -> Result<()> {
-        let file = OpenOptions::new()
-            .write(true)
-            .truncate(true)
-            .create(true)
-            .open(path.as_ref())?;
-
-        self.write(file)
+        let code = self.generate()?;
+        let path = path.as_ref();
+        let parent = path
+            .parent()
+            .filter(|p| !p.as_os_str().is_empty())
+            .unwrap_or_else(|| Path::new("."));
+        let mut file = tempfile::NamedTempFile::new_in(parent)?;
+        file.write_all(code.as_bytes())?;
+        file.as_file().sync_all()?;
+        file.persist(path)?;
+        Ok(())
     }
 
     fn write_allow_dead_code(&self, w: &mut impl Write) -> Result<()> {

@@ -1,0 +1,3 @@
+# Preserve sample bytes and recorded hashes across Windows/Linux checkouts.
+dbc_samples/** -text -whitespace
+artifacts/** -text whitespace=cr-at-eol

@@ -51,6 +51,7 @@ impl IntSize {
 pub enum ValType {
     Bool,
     F32,
+    F64,
     UnsignedInt(IntSize),
     SignedInt(IntSize),
 }
@@ -62,6 +63,7 @@ impl Display for ValType {
             UnsignedInt(v) => write!(f, "u{}", v.bits()),
             SignedInt(v) => write!(f, "i{}", v.bits()),
             F32 => write!(f, "f32"),
+            Self::F64 => write!(f, "f64"),
         }
     }
 }
@@ -176,20 +178,25 @@ fn is_float_signal(signal: &Signal) -> bool {
 
 impl ValType {
     /// Get the Rust type for a signal
+    #[allow(clippy::float_cmp)] // Exact identity scaling determines the API, not approximate equality.
     pub(crate) fn from_signal(signal: &Signal) -> Self {
-        if signal.size == 1 {
+        if signal.size == 1
+            && signal.value_type == Unsigned
+            && signal.factor == 1.0
+            && signal.offset == 0.0
+            && signal.multiplexer_indicator != can_dbc::MultiplexIndicator::Multiplexor
+        {
             Bool
+        } else if signal.factor.abs() >= 9_223_372_036_854_775_808.0
+            || signal.offset.abs() >= 9_223_372_036_854_775_808.0
+        {
+            Self::F64
         } else if is_float_signal(signal) {
             // If there is any scaling needed, go for float
             F32
         } else {
             // FIXME: don't panic here
-            Self::from_signal_range(signal).unwrap_or_else(|| {
-                panic!(
-                    "Signal {} could not be represented as a Rust integer",
-                    signal.name,
-                );
-            })
+            Self::from_signal_range(signal).unwrap_or(Self::F64)
         }
     }
 }

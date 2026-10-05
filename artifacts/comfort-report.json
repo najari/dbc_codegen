@@ -1,0 +1,1291 @@
+{
+  "compile_failed": 0,
+  "compiled": 1,
+  "rejected": 0,
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+  "samples": [
+    {
+      "compilation": "passed",
+      "compiler_output": "",
+      "encoding": "windows1252",
+      "generation": "passed",
+      "input_sha256": "4295e71381968433b36d6616f77f27c95c1948ac307802529fd00a4ff4b66ef6",
+      "manifest": {
+        "code_sha256": "9997340e7b572e4f27f366773f180551f91e9bad16d89b3a845d4d104fccfaea",
+        "dbc_name": "Comfort.dbc",
+        "generator_revision": "8d0af24f258d356afc8c3a31d7a1f7de04e7209a",
+        "generator_source_sha256": "79fd5e9edf4a1bd15f631b8be808def0f9b41976d1f3f38fa0449714bd182ae0",
+        "generator_version": "0.4.0",
+        "input_sha256": "4295e71381968433b36d6616f77f27c95c1948ac307802529fd00a4ff4b66ef6",
+        "messages": [
+          {
+            "extended": false,
+            "generated_types": [
+              "TpDashboard"
+            ],
+            "id": 1541,
+            "ordinal": 0,
+            "signals": [
+              {
+                "bit_width": 48,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "data",
+                "receivers": [
+                  "Console"
+                ],
+                "reserved_names": [
+                  "data",
+                  "set_data",
+                  "data_raw_val",
+                  "set_data_raw_val",
+                  "data_phys_val",
+                  "data_multiplexed",
+                  "set_data_quantized",
+                  "DATA_MIN",
+                  "DATA_MAX"
+                ],
+                "source_name": "data",
+                "start_bit": 0,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 6,
+            "source_name": "TP_Dashboard",
+            "transmitters": [
+              "Dashboard"
+            ],
+            "type_name": "TpDashboard"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "DiagRequest"
+            ],
+            "id": 1792,
+            "ordinal": 1,
+            "signals": [],
+            "size": 8,
+            "source_name": "Diag_Request",
+            "transmitters": [],
+            "type_name": "DiagRequest"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "DiagResponse"
+            ],
+            "id": 1536,
+            "ordinal": 2,
+            "signals": [],
+            "size": 8,
+            "source_name": "Diag_Response",
+            "transmitters": [],
+            "type_name": "DiagResponse"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "DiagResponseMotor"
+            ],
+            "id": 1537,
+            "ordinal": 3,
+            "signals": [
+              {
+                "bit_width": 64,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "data",
+                "receivers": [],
+                "reserved_names": [
+                  "data",
+                  "set_data",
+                  "data_raw_val",
+                  "set_data_raw_val",
+                  "data_phys_val",
+                  "data_multiplexed",
+                  "set_data_quantized",
+                  "DATA_MIN",
+                  "DATA_MAX"
+                ],
+                "source_name": "data",
+                "start_bit": 0,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 8,
+            "source_name": "DiagResponse_Motor",
+            "transmitters": [
+              "Gateway"
+            ],
+            "type_name": "DiagResponseMotor"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "DiagResponseDoorLeft"
+            ],
+            "id": 1543,
+            "ordinal": 4,
+            "signals": [
+              {
+                "bit_width": 64,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "data",
+                "receivers": [],
+                "reserved_names": [
+                  "data",
+                  "set_data",
+                  "data_raw_val",
+                  "set_data_raw_val",
+                  "data_phys_val",
+                  "data_multiplexed",
+                  "set_data_quantized",
+                  "DATA_MIN",
+                  "DATA_MAX"
+                ],
+                "source_name": "data",
+                "start_bit": 0,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 8,
+            "source_name": "DiagResponse_DoorLeft",
+            "transmitters": [
+              "DOOR_le"
+            ],
+            "type_name": "DiagResponseDoorLeft"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "DiagRequestDbc6N1"
+            ],
+            "id": 1542,
+            "ordinal": 5,
+            "signals": [
+              {
+                "bit_width": 64,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "data",
+                "receivers": [
+                  "DOOR_le"
+                ],
+                "reserved_names": [
+                  "data",
+                  "set_data",
+                  "data_raw_val",
+                  "set_data_raw_val",
+                  "data_phys_val",
+                  "data_multiplexed",
+                  "set_data_quantized",
+                  "DATA_MIN",
+                  "DATA_MAX"
+                ],
+                "source_name": "data",
+                "start_bit": 0,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 8,
+            "source_name": "DiagRequest",
+            "transmitters": [],
+            "type_name": "DiagRequestDbc6N1"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "TpConsole"
+            ],
+            "id": 1540,
+            "ordinal": 6,
+            "signals": [
+              {
+                "bit_width": 48,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "data",
+                "receivers": [
+                  "Dashboard"
+                ],
+                "reserved_names": [
+                  "data",
+                  "set_data",
+                  "data_raw_val",
+                  "set_data_raw_val",
+                  "data_phys_val",
+                  "data_multiplexed",
+                  "set_data_quantized",
+                  "DATA_MIN",
+                  "DATA_MAX"
+                ],
+                "source_name": "data",
+                "start_bit": 0,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 6,
+            "source_name": "TP_Console",
+            "transmitters": [
+              "Console"
+            ],
+            "type_name": "TpConsole"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "NmGateway"
+            ],
+            "id": 1053,
+            "ordinal": 7,
+            "signals": [
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "sleep_ind",
+                "receivers": [
+                  "Gateway",
+                  "DOOR_ri",
+                  "DOOR_le"
+                ],
+                "reserved_names": [
+                  "sleep_ind",
+                  "set_sleep_ind",
+                  "sleep_ind_raw_val",
+                  "set_sleep_ind_raw_val",
+                  "sleep_ind_phys_val",
+                  "sleep_ind_multiplexed",
+                  "set_sleep_ind_quantized",
+                  "SLEEP_IND_MIN",
+                  "SLEEP_IND_MAX"
+                ],
+                "source_name": "SleepInd",
+                "start_bit": 12,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 4,
+            "source_name": "NM_Gateway",
+            "transmitters": [
+              "Gateway"
+            ],
+            "type_name": "NmGateway"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "NmDooRright"
+            ],
+            "id": 1052,
+            "ordinal": 8,
+            "signals": [
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "sleep_ind",
+                "receivers": [
+                  "Gateway",
+                  "DOOR_le"
+                ],
+                "reserved_names": [
+                  "sleep_ind",
+                  "set_sleep_ind",
+                  "sleep_ind_raw_val",
+                  "set_sleep_ind_raw_val",
+                  "sleep_ind_phys_val",
+                  "sleep_ind_multiplexed",
+                  "set_sleep_ind_quantized",
+                  "SLEEP_IND_MIN",
+                  "SLEEP_IND_MAX"
+                ],
+                "source_name": "SleepInd",
+                "start_bit": 12,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 4,
+            "source_name": "NM_DOORright",
+            "transmitters": [
+              "DOOR_ri"
+            ],
+            "type_name": "NmDooRright"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "NmDooRleft"
+            ],
+            "id": 1051,
+            "ordinal": 9,
+            "signals": [
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "sleep_ind",
+                "receivers": [
+                  "Gateway",
+                  "DOOR_ri"
+                ],
+                "reserved_names": [
+                  "sleep_ind",
+                  "set_sleep_ind",
+                  "sleep_ind_raw_val",
+                  "set_sleep_ind_raw_val",
+                  "sleep_ind_phys_val",
+                  "sleep_ind_multiplexed",
+                  "set_sleep_ind_quantized",
+                  "SLEEP_IND_MIN",
+                  "SLEEP_IND_MAX"
+                ],
+                "source_name": "SleepInd",
+                "start_bit": 12,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 4,
+            "source_name": "NM_DOORleft",
+            "transmitters": [
+              "DOOR_le"
+            ],
+            "type_name": "NmDooRleft"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "NmConsole"
+            ],
+            "id": 1050,
+            "ordinal": 10,
+            "signals": [
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "sleep_ind",
+                "receivers": [
+                  "Console",
+                  "Gateway",
+                  "DOOR_ri",
+                  "DOOR_le"
+                ],
+                "reserved_names": [
+                  "sleep_ind",
+                  "set_sleep_ind",
+                  "sleep_ind_raw_val",
+                  "set_sleep_ind_raw_val",
+                  "sleep_ind_phys_val",
+                  "sleep_ind_multiplexed",
+                  "set_sleep_ind_quantized",
+                  "SLEEP_IND_MIN",
+                  "SLEEP_IND_MAX"
+                ],
+                "source_name": "SleepInd",
+                "start_bit": 12,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 4,
+            "source_name": "NM_Console",
+            "transmitters": [
+              "Console"
+            ],
+            "type_name": "NmConsole"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "DoorR"
+            ],
+            "id": 497,
+            "ordinal": 11,
+            "signals": [
+              {
+                "bit_width": 8,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "wn_position",
+                "receivers": [],
+                "reserved_names": [
+                  "wn_position",
+                  "set_wn_position",
+                  "wn_position_raw_val",
+                  "set_wn_position_raw_val",
+                  "wn_position_phys_val",
+                  "wn_position_multiplexed",
+                  "set_wn_position_quantized",
+                  "WN_POSITION_MIN",
+                  "WN_POSITION_MAX"
+                ],
+                "source_name": "WN_Position",
+                "start_bit": 0,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 1,
+            "source_name": "DOOR_r",
+            "transmitters": [
+              "DOOR_ri"
+            ],
+            "type_name": "DoorR"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "DoorL"
+            ],
+            "id": 496,
+            "ordinal": 12,
+            "signals": [
+              {
+                "bit_width": 8,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "wn_position",
+                "receivers": [],
+                "reserved_names": [
+                  "wn_position",
+                  "set_wn_position",
+                  "wn_position_raw_val",
+                  "set_wn_position_raw_val",
+                  "wn_position_phys_val",
+                  "wn_position_multiplexed",
+                  "set_wn_position_quantized",
+                  "WN_POSITION_MIN",
+                  "WN_POSITION_MAX"
+                ],
+                "source_name": "WN_Position",
+                "start_bit": 0,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 1,
+            "source_name": "DOOR_l",
+            "transmitters": [
+              "DOOR_le"
+            ],
+            "type_name": "DoorL"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "Console2",
+              "Console2Active"
+            ],
+            "id": 417,
+            "ordinal": 13,
+            "signals": [
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "phase",
+                "receivers": [],
+                "reserved_names": [
+                  "phase",
+                  "set_phase",
+                  "phase_raw_val",
+                  "set_phase_raw_val",
+                  "phase_phys_val",
+                  "phase_multiplexed",
+                  "set_phase_quantized",
+                  "PHASE_MIN",
+                  "PHASE_MAX"
+                ],
+                "source_name": "Phase",
+                "start_bit": 8,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 2,
+                "byte_order": "LittleEndian",
+                "enum_name": "Console2Active",
+                "enum_variants": [
+                  {
+                    "canonical_raw_value": 0,
+                    "raw_value": 0,
+                    "source_label": "None",
+                    "variant_name": "None"
+                  },
+                  {
+                    "canonical_raw_value": 1,
+                    "raw_value": 1,
+                    "source_label": "Turn_right",
+                    "variant_name": "TurnRight"
+                  },
+                  {
+                    "canonical_raw_value": 2,
+                    "raw_value": 2,
+                    "source_label": "Turn_left",
+                    "variant_name": "TurnLeft"
+                  },
+                  {
+                    "canonical_raw_value": 3,
+                    "raw_value": 3,
+                    "source_label": "Warning",
+                    "variant_name": "Warning"
+                  }
+                ],
+                "field_name": "active",
+                "receivers": [],
+                "reserved_names": [
+                  "active",
+                  "set_active",
+                  "active_raw_val",
+                  "set_active_raw_val",
+                  "active_phys_val",
+                  "active_multiplexed",
+                  "set_active_quantized",
+                  "ACTIVE_MIN",
+                  "ACTIVE_MAX"
+                ],
+                "source_name": "Active",
+                "start_bit": 1,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "light",
+                "receivers": [],
+                "reserved_names": [
+                  "light",
+                  "set_light",
+                  "light_raw_val",
+                  "set_light_raw_val",
+                  "light_phys_val",
+                  "light_multiplexed",
+                  "set_light_quantized",
+                  "LIGHT_MIN",
+                  "LIGHT_MAX"
+                ],
+                "source_name": "Light",
+                "start_bit": 0,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 2,
+            "source_name": "Console_2",
+            "transmitters": [
+              "Console"
+            ],
+            "type_name": "Console2"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "Console1"
+            ],
+            "id": 416,
+            "ordinal": 14,
+            "signals": [
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "wn_right_up",
+                "receivers": [
+                  "DOOR_ri"
+                ],
+                "reserved_names": [
+                  "wn_right_up",
+                  "set_wn_right_up",
+                  "wn_right_up_raw_val",
+                  "set_wn_right_up_raw_val",
+                  "wn_right_up_phys_val",
+                  "wn_right_up_multiplexed",
+                  "set_wn_right_up_quantized",
+                  "WN_RIGHT_UP_MIN",
+                  "WN_RIGHT_UP_MAX"
+                ],
+                "source_name": "WN_right_up",
+                "start_bit": 30,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "wn_right_down",
+                "receivers": [
+                  "DOOR_ri"
+                ],
+                "reserved_names": [
+                  "wn_right_down",
+                  "set_wn_right_down",
+                  "wn_right_down_raw_val",
+                  "set_wn_right_down_raw_val",
+                  "wn_right_down_phys_val",
+                  "wn_right_down_multiplexed",
+                  "set_wn_right_down_quantized",
+                  "WN_RIGHT_DOWN_MIN",
+                  "WN_RIGHT_DOWN_MAX"
+                ],
+                "source_name": "WN_right_down",
+                "start_bit": 29,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "wn_left_up",
+                "receivers": [
+                  "DOOR_le"
+                ],
+                "reserved_names": [
+                  "wn_left_up",
+                  "set_wn_left_up",
+                  "wn_left_up_raw_val",
+                  "set_wn_left_up_raw_val",
+                  "wn_left_up_phys_val",
+                  "wn_left_up_multiplexed",
+                  "set_wn_left_up_quantized",
+                  "WN_LEFT_UP_MIN",
+                  "WN_LEFT_UP_MAX"
+                ],
+                "source_name": "WN_left_up",
+                "start_bit": 26,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "wn_left_down",
+                "receivers": [
+                  "DOOR_le"
+                ],
+                "reserved_names": [
+                  "wn_left_down",
+                  "set_wn_left_down",
+                  "wn_left_down_raw_val",
+                  "set_wn_left_down_raw_val",
+                  "wn_left_down_phys_val",
+                  "wn_left_down_multiplexed",
+                  "set_wn_left_down_quantized",
+                  "WN_LEFT_DOWN_MIN",
+                  "WN_LEFT_DOWN_MAX"
+                ],
+                "source_name": "WN_left_down",
+                "start_bit": 25,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "mirror_r2d",
+                "receivers": [],
+                "reserved_names": [
+                  "mirror_r2d",
+                  "set_mirror_r2d",
+                  "mirror_r2d_raw_val",
+                  "set_mirror_r2d_raw_val",
+                  "mirror_r2d_phys_val",
+                  "mirror_r2d_multiplexed",
+                  "set_mirror_r2d_quantized",
+                  "MIRROR_R2D_MIN",
+                  "MIRROR_R2D_MAX"
+                ],
+                "source_name": "Mirror_r2d",
+                "start_bit": 7,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "mirror_r2u",
+                "receivers": [],
+                "reserved_names": [
+                  "mirror_r2u",
+                  "set_mirror_r2u",
+                  "mirror_r2u_raw_val",
+                  "set_mirror_r2u_raw_val",
+                  "mirror_r2u_phys_val",
+                  "mirror_r2u_multiplexed",
+                  "set_mirror_r2u_quantized",
+                  "MIRROR_R2U_MIN",
+                  "MIRROR_R2U_MAX"
+                ],
+                "source_name": "Mirror_r2u",
+                "start_bit": 6,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "mirror_r2r",
+                "receivers": [],
+                "reserved_names": [
+                  "mirror_r2r",
+                  "set_mirror_r2r",
+                  "mirror_r2r_raw_val",
+                  "set_mirror_r2r_raw_val",
+                  "mirror_r2r_phys_val",
+                  "mirror_r2r_multiplexed",
+                  "set_mirror_r2r_quantized",
+                  "MIRROR_R2R_MIN",
+                  "MIRROR_R2R_MAX"
+                ],
+                "source_name": "Mirror_r2r",
+                "start_bit": 5,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "mirror_r2l",
+                "receivers": [],
+                "reserved_names": [
+                  "mirror_r2l",
+                  "set_mirror_r2l",
+                  "mirror_r2l_raw_val",
+                  "set_mirror_r2l_raw_val",
+                  "mirror_r2l_phys_val",
+                  "mirror_r2l_multiplexed",
+                  "set_mirror_r2l_quantized",
+                  "MIRROR_R2L_MIN",
+                  "MIRROR_R2L_MAX"
+                ],
+                "source_name": "Mirror_r2l",
+                "start_bit": 4,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "mirror_l2d",
+                "receivers": [],
+                "reserved_names": [
+                  "mirror_l2d",
+                  "set_mirror_l2d",
+                  "mirror_l2d_raw_val",
+                  "set_mirror_l2d_raw_val",
+                  "mirror_l2d_phys_val",
+                  "mirror_l2d_multiplexed",
+                  "set_mirror_l2d_quantized",
+                  "MIRROR_L2D_MIN",
+                  "MIRROR_L2D_MAX"
+                ],
+                "source_name": "Mirror_l2d",
+                "start_bit": 3,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "mirror_l2u",
+                "receivers": [],
+                "reserved_names": [
+                  "mirror_l2u",
+                  "set_mirror_l2u",
+                  "mirror_l2u_raw_val",
+                  "set_mirror_l2u_raw_val",
+                  "mirror_l2u_phys_val",
+                  "mirror_l2u_multiplexed",
+                  "set_mirror_l2u_quantized",
+                  "MIRROR_L2U_MIN",
+                  "MIRROR_L2U_MAX"
+                ],
+                "source_name": "Mirror_l2u",
+                "start_bit": 2,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "mirror_l2r",
+                "receivers": [],
+                "reserved_names": [
+                  "mirror_l2r",
+                  "set_mirror_l2r",
+                  "mirror_l2r_raw_val",
+                  "set_mirror_l2r_raw_val",
+                  "mirror_l2r_phys_val",
+                  "mirror_l2r_multiplexed",
+                  "set_mirror_l2r_quantized",
+                  "MIRROR_L2R_MIN",
+                  "MIRROR_L2R_MAX"
+                ],
+                "source_name": "Mirror_l2r",
+                "start_bit": 1,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "mirror_l2l",
+                "receivers": [],
+                "reserved_names": [
+                  "mirror_l2l",
+                  "set_mirror_l2l",
+                  "mirror_l2l_raw_val",
+                  "set_mirror_l2l_raw_val",
+                  "mirror_l2l_phys_val",
+                  "mirror_l2l_multiplexed",
+                  "set_mirror_l2l_quantized",
+                  "MIRROR_L2L_MIN",
+                  "MIRROR_L2L_MAX"
+                ],
+                "source_name": "Mirror_l2l",
+                "start_bit": 0,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 4,
+            "source_name": "Console_1",
+            "transmitters": [
+              "Console"
+            ],
+            "type_name": "Console1"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "Gateway2"
+            ],
+            "id": 273,
+            "ordinal": 15,
+            "signals": [
+              {
+                "bit_width": 10,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "voltage",
+                "receivers": [],
+                "reserved_names": [
+                  "voltage",
+                  "set_voltage",
+                  "voltage_raw_val",
+                  "set_voltage_raw_val",
+                  "voltage_phys_val",
+                  "voltage_multiplexed",
+                  "set_voltage_quantized",
+                  "VOLTAGE_MIN",
+                  "VOLTAGE_MAX"
+                ],
+                "source_name": "Voltage",
+                "start_bit": 48,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 8,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "petrol_level",
+                "receivers": [
+                  "Dashboard"
+                ],
+                "reserved_names": [
+                  "petrol_level",
+                  "set_petrol_level",
+                  "petrol_level_raw_val",
+                  "set_petrol_level_raw_val",
+                  "petrol_level_phys_val",
+                  "petrol_level_multiplexed",
+                  "set_petrol_level_quantized",
+                  "PETROL_LEVEL_MIN",
+                  "PETROL_LEVEL_MAX"
+                ],
+                "source_name": "PetrolLevel",
+                "start_bit": 40,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 16,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "eng_speed",
+                "receivers": [
+                  "Dashboard"
+                ],
+                "reserved_names": [
+                  "eng_speed",
+                  "set_eng_speed",
+                  "eng_speed_raw_val",
+                  "set_eng_speed_raw_val",
+                  "eng_speed_phys_val",
+                  "eng_speed_multiplexed",
+                  "set_eng_speed_quantized",
+                  "ENG_SPEED_MIN",
+                  "ENG_SPEED_MAX"
+                ],
+                "source_name": "EngSpeed",
+                "start_bit": 24,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 16,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "car_speed",
+                "receivers": [
+                  "Dashboard"
+                ],
+                "reserved_names": [
+                  "car_speed",
+                  "set_car_speed",
+                  "car_speed_raw_val",
+                  "set_car_speed_raw_val",
+                  "car_speed_phys_val",
+                  "car_speed_multiplexed",
+                  "set_car_speed_quantized",
+                  "CAR_SPEED_MIN",
+                  "CAR_SPEED_MAX"
+                ],
+                "source_name": "CarSpeed",
+                "start_bit": 8,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 8,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "engine_temp",
+                "receivers": [
+                  "Dashboard"
+                ],
+                "reserved_names": [
+                  "engine_temp",
+                  "set_engine_temp",
+                  "engine_temp_raw_val",
+                  "set_engine_temp_raw_val",
+                  "engine_temp_phys_val",
+                  "engine_temp_multiplexed",
+                  "set_engine_temp_quantized",
+                  "ENGINE_TEMP_MIN",
+                  "ENGINE_TEMP_MAX"
+                ],
+                "source_name": "EngineTemp",
+                "start_bit": 0,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 8,
+            "source_name": "Gateway_2",
+            "transmitters": [
+              "Gateway"
+            ],
+            "type_name": "Gateway2"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "Gateway1"
+            ],
+            "id": 272,
+            "ordinal": 16,
+            "signals": [
+              {
+                "bit_width": 4,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "gear",
+                "receivers": [
+                  "Dashboard"
+                ],
+                "reserved_names": [
+                  "gear",
+                  "set_gear",
+                  "gear_raw_val",
+                  "set_gear_raw_val",
+                  "gear_phys_val",
+                  "gear_multiplexed",
+                  "set_gear_quantized",
+                  "GEAR_MIN",
+                  "GEAR_MAX"
+                ],
+                "source_name": "Gear",
+                "start_bit": 8,
+                "wire_type": "Signed"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "engine_running",
+                "receivers": [],
+                "reserved_names": [
+                  "engine_running",
+                  "set_engine_running",
+                  "engine_running_raw_val",
+                  "set_engine_running_raw_val",
+                  "engine_running_phys_val",
+                  "engine_running_multiplexed",
+                  "set_engine_running_quantized",
+                  "ENGINE_RUNNING_MIN",
+                  "ENGINE_RUNNING_MAX"
+                ],
+                "source_name": "EngineRunning",
+                "start_bit": 7,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "ig_15",
+                "receivers": [
+                  "Dashboard",
+                  "Console"
+                ],
+                "reserved_names": [
+                  "ig_15",
+                  "set_ig_15",
+                  "ig_15_raw_val",
+                  "set_ig_15_raw_val",
+                  "ig_15_phys_val",
+                  "ig_15_multiplexed",
+                  "set_ig_15_quantized",
+                  "IG_15_MIN",
+                  "IG_15_MAX"
+                ],
+                "source_name": "Ig_15",
+                "start_bit": 2,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "ig_15r",
+                "receivers": [
+                  "Dashboard"
+                ],
+                "reserved_names": [
+                  "ig_15r",
+                  "set_ig_15r",
+                  "ig_15r_raw_val",
+                  "set_ig_15r_raw_val",
+                  "ig_15r_phys_val",
+                  "ig_15r_multiplexed",
+                  "set_ig_15r_quantized",
+                  "IG_15R_MIN",
+                  "IG_15R_MAX"
+                ],
+                "source_name": "Ig_15R",
+                "start_bit": 1,
+                "wire_type": "Unsigned"
+              },
+              {
+                "bit_width": 1,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "starter_key",
+                "receivers": [
+                  "Dashboard"
+                ],
+                "reserved_names": [
+                  "starter_key",
+                  "set_starter_key",
+                  "starter_key_raw_val",
+                  "set_starter_key_raw_val",
+                  "starter_key_phys_val",
+                  "starter_key_multiplexed",
+                  "set_starter_key_quantized",
+                  "STARTER_KEY_MIN",
+                  "STARTER_KEY_MAX"
+                ],
+                "source_name": "StarterKey",
+                "start_bit": 0,
+                "wire_type": "Unsigned"
+              }
+            ],
+            "size": 3,
+            "source_name": "Gateway_1",
+            "transmitters": [
+              "Gateway"
+            ],
+            "type_name": "Gateway1"
+          },
+          {
+            "extended": false,
+            "generated_types": [
+              "DebugMsg1"
+            ],
+            "id": 256,
+            "ordinal": 17,
+            "signals": [
+              {
+                "bit_width": 16,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "data4",
+                "receivers": [
+                  "Gateway"
+                ],
+                "reserved_names": [
+                  "data4",
+                  "set_data4",
+                  "data4_raw_val",
+                  "set_data4_raw_val",
+                  "data4_phys_val",
+                  "data4_multiplexed",
+                  "set_data4_quantized",
+                  "DATA4_MIN",
+                  "DATA4_MAX"
+                ],
+                "source_name": "Data4",
+                "start_bit": 48,
+                "wire_type": "Signed"
+              },
+              {
+                "bit_width": 16,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "data3",
+                "receivers": [
+                  "Gateway"
+                ],
+                "reserved_names": [
+                  "data3",
+                  "set_data3",
+                  "data3_raw_val",
+                  "set_data3_raw_val",
+                  "data3_phys_val",
+                  "data3_multiplexed",
+                  "set_data3_quantized",
+                  "DATA3_MIN",
+                  "DATA3_MAX"
+                ],
+                "source_name": "Data3",
+                "start_bit": 32,
+                "wire_type": "Signed"
+              },
+              {
+                "bit_width": 16,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "data2",
+                "receivers": [
+                  "Gateway"
+                ],
+                "reserved_names": [
+                  "data2",
+                  "set_data2",
+                  "data2_raw_val",
+                  "set_data2_raw_val",
+                  "data2_phys_val",
+                  "data2_multiplexed",
+                  "set_data2_quantized",
+                  "DATA2_MIN",
+                  "DATA2_MAX"
+                ],
+                "source_name": "Data2",
+                "start_bit": 16,
+                "wire_type": "Signed"
+              },
+              {
+                "bit_width": 16,
+                "byte_order": "LittleEndian",
+                "enum_name": null,
+                "enum_variants": [],
+                "field_name": "data1",
+                "receivers": [
+                  "Gateway"
+                ],
+                "reserved_names": [
+                  "data1",
+                  "set_data1",
+                  "data1_raw_val",
+                  "set_data1_raw_val",
+                  "data1_phys_val",
+                  "data1_multiplexed",
+                  "set_data1_quantized",
+                  "DATA1_MIN",
+                  "DATA1_MAX"
+                ],
+                "source_name": "Data1",
+                "start_bit": 0,
+                "wire_type": "Signed"
+              }
+            ],
+            "size": 8,
+            "source_name": "DebugMsg1",
+            "transmitters": [],
+            "type_name": "DebugMsg1"
+          }
+        ],
+        "options": {
+          "allow_dead_code": true,
+          "attribute_structs": "[]",
+          "check_ranges": "always",
+          "debug_prints": false,
+          "encoding": "windows1252",
+          "impl_arbitrary": "never",
+          "impl_debug": "always",
+          "impl_defmt": "never",
+          "impl_embedded_can_frame": "always",
+          "impl_error": "never",
+          "impl_serde": "never",
+          "padding_bit_value": false,
+          "physical_f64": false,
+          "rounding": "truncate",
+          "selected_nodes": []
+        },
+        "policies": {
+          "multiplexing": "single unsigned selector; extended/nested definitions rejected",
+          "physical_special_values": "reject NaN and infinity; raw IEEE bits preserve all patterns",
+          "publication": "two-file rollback on I/O failure; verify code_sha256 before reuse",
+          "raw_setter": "wire-range-checked; bypasses physical min/max",
+          "zero_range": "[0|0] is enforced when check_ranges is enabled"
+        },
+        "schema_version": 1
+      },
+      "path": "C:\\Users\\admin\\codex\\asc_parser_engine\\can_example\\vector_samples\\2026-10-03\\groups\\CANoe_13.0.172\\CAN\\CANSystemDemo\\dbc\\CANdb\\Comfort.dbc",
+      "source_unchanged": true
+    }
+  ],
+  "total": 1
+}
